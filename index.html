@@ -1,27 +1,43 @@
 <!DOCTYPE html>
+<!--
+  FlightDeck – Pilot Toolkit
+  Copyright © 2026 Ufuk Tezerdi. All rights reserved.
+
+  This software, including its source code, design and content, is the
+  exclusive property of Ufuk Tezerdi. No part of it may be copied, modified,
+  redistributed or used without prior written permission of the owner.
+-->
 <html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#4f46e5">
-<meta name="description" content="Dein privates Haushaltsbuch für Einnahmen, Ausgaben und Budget.">
+<meta name="theme-color" content="#0ea5e9">
+<meta name="description" content="Dein modernes Haushaltsbuch für Einnahmen, Ausgaben und Budget.">
 <link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="./icon-192.png">
-<title>Haushaltsbuch</title>
+<title>myFinances</title>
 <style>
-:root{--bg:#f3f6fb;--card:#fff;--tx:#172033;--mu:#68758b;--bd:#e2e8f0;--ac:#4f46e5;--ac2:#7c3aed;--in:#059669;--out:#e05260;--inb:#e6f8f0;--outb:#fff0f1;--shadow:0 8px 28px rgba(28,39,74,.07);box-sizing:border-box;color-scheme:light}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10131c;--card:#191e2b;--tx:#eef2ff;--mu:#9ba7bd;--bd:#30384a;--ac:#8b87ff;--ac2:#a78bfa;--in:#4ade80;--out:#fb7185;--inb:#153529;--outb:#3b2028;--shadow:0 8px 28px rgba(0,0,0,.18);color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#10131c;--card:#191e2b;--tx:#eef2ff;--mu:#9ba7bd;--bd:#30384a;--ac:#8b87ff;--ac2:#a78bfa;--in:#4ade80;--out:#fb7185;--inb:#153529;--outb:#3b2028;--shadow:0 8px 28px rgba(0,0,0,.18);color-scheme:dark}
-*{box-sizing:border-box}html{scroll-padding-top:20px}body{margin:0;background:radial-gradient(ellipse at top left,rgba(99,102,241,.09),transparent 36%),var(--bg);color:var(--tx);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}main{max-width:1180px;margin:0 auto;padding:28px 22px 48px}
-header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:18px 20px;margin-bottom:24px;background:var(--card);border:1px solid var(--bd);border-radius:18px;box-shadow:var(--shadow)}.brand{display:flex;align-items:center;gap:12px;margin-right:auto;min-width:210px}.brand-mark{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;font-size:22px;font-weight:800;box-shadow:0 6px 16px rgba(79,70,229,.24)}h1{font-size:21px;line-height:1.2;letter-spacing:-.5px;margin:0}.brand-sub{font-size:12px;color:var(--mu);margin-top:3px}.toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}select,input,button{font:inherit;color:var(--tx)}select,input{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:10px 12px;width:100%;outline:none}select:focus,input:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 3px rgba(99,102,241,.12)}button{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:9px 13px;cursor:pointer;transition:transform .15s,border-color .15s,background .15s}button:hover{border-color:var(--ac);transform:translateY(-1px)}button.p{background:linear-gradient(135deg,var(--ac),var(--ac2));border-color:transparent;color:#fff;font-weight:600}button.d{color:var(--out)}button.s{padding:4px 9px;font-size:13px}.toolbar select{width:auto;min-width:170px;max-width:230px}.menu-dropdown{position:relative}.menu-dropdown summary{list-style:none;cursor:pointer;user-select:none;border:1px solid var(--bd);border-radius:10px;padding:9px 13px;background:var(--card);font-weight:600}.menu-dropdown summary::-webkit-details-marker{display:none}.dropdown-panel{position:absolute;right:0;top:calc(100% + 8px);z-index:40;min-width:190px;padding:6px;background:var(--card);border:1px solid var(--bd);border-radius:13px;box-shadow:var(--shadow);display:grid;gap:4px}.dropdown-panel button{width:100%;text-align:left;border:0;background:transparent;transform:none}.dropdown-panel button:hover{background:var(--bg)}
-#app>.grid{margin-bottom:14px}.grid{display:grid;gap:14px}.kpis{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin-bottom:16px}.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;box-shadow:var(--shadow);min-width:0}.kpi{position:relative;overflow:hidden}.kpi:after{content:"";position:absolute;right:-22px;top:-25px;width:90px;height:90px;border-radius:50%;background:var(--ac);opacity:.07}.kpi small{color:var(--mu);display:block;font-size:13px;margin-bottom:9px}.kpi b{font-size:clamp(21px,2.5vw,27px);letter-spacing:-.7px;overflow-wrap:anywhere}.in{color:var(--in)}.out{color:var(--out)}.ov{grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));margin-bottom:16px}.bar{display:grid;grid-template-columns:105px minmax(30px,1fr) 90px;gap:10px;align-items:center;margin:12px 0;font-size:13px}.bar i{display:block;height:9px;border-radius:99px;background:linear-gradient(90deg,var(--ac),var(--ac2));min-width:2px}.bar span:last-child{text-align:right;font-variant-numeric:tabular-nums}.ph{display:flex;align-items:center;gap:8px;margin-bottom:14px}.ph h2{margin-right:auto;font-size:16px;letter-spacing:-.2px}.sec{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:16px 0 5px}.sec b{font-size:13px}.sum{display:flex;justify-content:space-between;gap:8px;padding:11px 12px;border-radius:10px;margin-top:14px;font-weight:650}.empty{color:var(--mu);font-size:13px;padding:10px 0}table{width:100%;border-collapse:collapse;font-size:13px}th{color:var(--mu);font-weight:600;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding:7px 6px}td{padding:10px 6px;border-top:1px solid var(--bd)}td.n,th.n{text-align:right;white-space:nowrap}td.a{text-align:right;white-space:nowrap}.tag{font-size:11px;color:var(--mu)}.k{font-weight:700;letter-spacing:1px;padding:3px 9px}textarea{width:100%;min-height:80px;background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:10px;padding:10px;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace}#menu{position:fixed;z-index:50;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:5px;min-width:160px;box-shadow:var(--shadow)}#menu[hidden]{display:none}#menu button{display:block;width:100%;text-align:left;border:0;background:none;padding:9px 11px}#menu button:hover{background:var(--bg)}button.x{background:var(--out);border-color:var(--out);color:#fff}dialog{border:1px solid var(--bd);border-radius:16px;background:var(--card);color:var(--tx);width:min(420px,92vw);padding:22px;box-shadow:var(--shadow)}dialog::backdrop{background:rgba(15,23,42,.5);backdrop-filter:blur(3px)}dialog h2{font-size:18px;margin:0}dialog p{margin:10px 0 0;color:var(--mu)}label{display:block;font-size:12px;font-weight:600;color:var(--mu);margin:13px 0 5px}.row{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
+:root{--bg:#f8fafc;--card:#fff;--tx:#0f172a;--mu:#64748b;--bd:#e2e8f0;--ac:#0ea5e9;--ac2:#10b981;--in:#059669;--out:#e11d48;--inb:#ecfdf5;--outb:#fff1f2;--shadow:0 4px 20px -2px rgba(15,23,42,.05);box-sizing:border-box;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f172a;--card:#1e293b;--tx:#f8fafc;--mu:#94a3b8;--bd:#334155;--ac:#38bdf8;--ac2:#34d399;--in:#34d399;--out:#fb7185;--inb:#064e3b;--outb:#4c0519;--shadow:0 4px 20px -2px rgba(0,0,0,.3);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f172a;--card:#1e293b;--tx:#f8fafc;--mu:#94a3b8;--bd:#334155;--ac:#38bdf8;--ac2:#34d399;--in:#34d399;--out:#fb7185;--inb:#064e3b;--outb:#4c0519;--shadow:0 4px 20px -2px rgba(0,0,0,.3);color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:20px}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}main{max-width:1180px;margin:0 auto;padding:28px 22px 48px}
+header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:18px 20px;margin-bottom:24px;background:var(--card);border:1px solid var(--bd);border-radius:16px;box-shadow:var(--shadow)}.brand{display:flex;align-items:center;gap:12px;margin-right:auto;min-width:210px}.brand-mark{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;box-shadow:0 4px 12px rgba(14,165,233,.25)}h1{font-size:21px;line-height:1.2;letter-spacing:-.5px;margin:0}.brand-sub{font-size:12px;color:var(--mu);margin-top:3px}.toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}select,input,button{font:inherit;color:var(--tx)}select,input{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:10px 12px;width:100%;outline:none}select:focus,input:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 3px rgba(14,165,233,.15)}button{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:9px 13px;cursor:pointer;transition:transform .15s,border-color .15s,background .15s}button:hover{border-color:var(--ac);transform:translateY(-1px)}button.p{background:linear-gradient(135deg,var(--ac),var(--ac2));border-color:transparent;color:#fff;font-weight:600}button.d{color:var(--out)}button.s{padding:4px 9px;font-size:13px}.toolbar select{width:auto;min-width:170px;max-width:230px}.menu-dropdown{position:relative}.menu-dropdown summary{list-style:none;cursor:pointer;user-select:none;border:1px solid var(--bd);border-radius:10px;padding:9px 13px;background:var(--card);font-weight:600}.menu-dropdown summary::-webkit-details-marker{display:none}.dropdown-panel{position:absolute;right:0;top:calc(100% + 8px);z-index:40;min-width:190px;padding:6px;background:var(--card);border:1px solid var(--bd);border-radius:12px;box-shadow:var(--shadow);display:grid;gap:4px}.dropdown-panel button{width:100%;text-align:left;border:0;background:transparent;transform:none}.dropdown-panel button:hover{background:var(--bg)}
+#app>.grid{margin-bottom:14px}.grid{display:grid;gap:14px}.kpis{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin-bottom:16px}.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;box-shadow:var(--shadow);min-width:0}.kpi{position:relative;overflow:hidden}.kpi:after{content:"";position:absolute;right:-22px;top:-25px;width:90px;height:90px;border-radius:50%;background:var(--ac);opacity:.06}.kpi small{color:var(--mu);display:block;font-size:13px;margin-bottom:9px}.kpi b{font-size:clamp(21px,2.5vw,27px);letter-spacing:-.7px;overflow-wrap:anywhere}.in{color:var(--in)}.out{color:var(--out)}.ov{grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));margin-bottom:16px}.bar{display:grid;grid-template-columns:105px minmax(30px,1fr) 90px;gap:10px;align-items:center;margin:12px 0;font-size:13px}.bar i{display:block;height:8px;border-radius:99px;background:linear-gradient(90deg,var(--ac),var(--ac2));min-width:2px}.bar span:last-child{text-align:right;font-variant-numeric:tabular-nums}.ph{display:flex;align-items:center;gap:8px;margin-bottom:14px}.ph h2{margin-right:auto;font-size:16px;letter-spacing:-.2px}.sec{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:16px 0 5px}.sec b{font-size:13px}.sum{display:flex;justify-content:space-between;gap:8px;padding:11px 12px;border-radius:10px;margin-top:14px;font-weight:650}.empty{color:var(--mu);font-size:13px;padding:10px 0}table{width:100%;border-collapse:collapse;font-size:13px}th{color:var(--mu);font-weight:600;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding:7px 6px}td{padding:10px 6px;border-top:1px solid var(--bd)}td.n,th.n{text-align:right;white-space:nowrap}td.a{text-align:right;white-space:nowrap}.tag{font-size:11px;color:var(--mu)}.k{font-weight:700;letter-spacing:1px;padding:3px 9px}textarea{width:100%;min-height:80px;background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:10px;padding:10px;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace}#menu{position:fixed;z-index:50;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:5px;min-width:160px;box-shadow:var(--shadow)}#menu[hidden]{display:none}#menu button{display:block;width:100%;text-align:left;border:0;background:none;padding:9px 11px}#menu button:hover{background:var(--bg)}button.x{background:var(--out);border-color:var(--out);color:#fff}dialog{border:1px solid var(--bd);border-radius:16px;background:var(--card);color:var(--tx);width:min(420px,92vw);padding:22px;box-shadow:var(--shadow)}dialog::backdrop{background:rgba(15,23,42,.4);backdrop-filter:blur(3px)}dialog h2{font-size:18px;margin:0}dialog p{margin:10px 0 0;color:var(--mu)}label{display:block;font-size:12px;font-weight:600;color:var(--mu);margin:13px 0 5px}.row{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
 @media(max-width:640px){main{padding:12px 10px 28px}header{padding:14px;border-radius:15px;gap:12px}.brand{width:100%;margin-right:0}.toolbar{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto}.toolbar select{width:100%;max-width:none;min-width:0}.menu-dropdown{justify-self:end}.dropdown-panel{right:0}.card{padding:14px}.kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.kpi b{font-size:20px}.ov{grid-template-columns:minmax(0,1fr)}.bar{grid-template-columns:90px minmax(20px,1fr) 80px;gap:7px}.ph h2{font-size:15px}table{font-size:12px}td{padding:8px 4px}th{padding:5px 4px}}
 </style>
 </head>
 <body>
 <main>
 <header>
-  <div class="brand"><div class="brand-mark">€</div><div><h1>Haushaltsbuch</h1><div class="brand-sub">Deine Finanzen auf einen Blick</div></div></div>
+  <div class="brand">
+    <div class="brand-mark">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
+    </div>
+    <div><h1>myFinances</h1><div class="brand-sub">Deine Finanzen im Überblick</div></div>
+  </div>
   <div class="toolbar">
     <select id="hh" aria-label="Haushalt auswählen"></select>
     <details class="menu-dropdown"><summary>Menü</summary><div class="dropdown-panel">
@@ -40,7 +56,7 @@ header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:18px 20px
 const CATS=["Wohnen","Kredite","Versicherungen","Entertainment","Sparen","Gesundheit","Lebensmittel","Mobilität","Sonstiges"];
 const ICATS=["Gehalt","Nebenverdienst","Sonstiges"];
 const FREQ={m:["monatlich",1],q:["vierteljährlich",3],y:["jährlich",12]};
-const KEY="haushaltsbuch-v2";
+const KEY="myfinances-v1";
 let uid=()=>Math.random().toString(36).slice(2,9);
 function blank(){return{cur:null,hh:[{id:uid(),name:"Mein Haushalt",persons:[]}]}}
 let S;
@@ -110,7 +126,7 @@ function entryDlg(p,t,x){
 }
 document.getElementById("hh").onchange=ev=>{S.cur=ev.target.value;save();render()};
 document.getElementById("hAdd").onclick=()=>nameDlg("Neuer Haushalt","",v=>{const h={id:uid(),name:v,persons:[]};S.hh.push(h);S.cur=h.id});
-function snapshot(){return JSON.stringify({app:"haushaltsbuch",version:1,exported:new Date().toISOString(),hh:S.hh},null,1)}
+function snapshot(){return JSON.stringify({app:"myfinances",version:1,exported:new Date().toISOString(),hh:S.hh},null,1)}
 function importData(txt){
   const o=JSON.parse(txt),a=Array.isArray(o)?o:o.hh;
   if(!Array.isArray(a)||!a.length)throw 0;
@@ -135,7 +151,7 @@ function dataDlg(){
   $("cx").onclick=()=>dlg.close();
   $("ex").onclick=async()=>{
     try{const d=window.claude&&await claude.use("downloads");
-      if(d){await d.save({filename:"haushaltsbuch-"+new Date().toISOString().slice(0,10)+".json",data:$("et").value});ms("Datei gespeichert.");return}
+      if(d){await d.save({filename:"myfinances-"+new Date().toISOString().slice(0,10)+".json",data:$("et").value});ms("Datei gespeichert.");return}
     }catch(x){if(x&&x.code==="declined"){ms("Abgebrochen.");return}}
     ms("Direktes Speichern ist hier nicht möglich – bitte den Text kopieren und selbst ablegen.");
   };
@@ -152,8 +168,6 @@ function dataDlg(){
   };
 }
 document.getElementById("hData").onclick=dataDlg;
-// Das obere Dropdown schließt sich automatisch, sobald außerhalb geklickt wird
-// oder ein Menüpunkt ausgewählt wurde.
 document.addEventListener("click",ev=>{
   const dropdown=document.querySelector(".menu-dropdown");
   if(!dropdown)return;
