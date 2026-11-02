@@ -1,14 +1,14 @@
 {
   "id": "./",
-  "name": "Haushaltsbuch",
-  "short_name": "Haushaltsbuch",
-  "description": "Dein privates Haushaltsbuch für Einnahmen, Ausgaben und Budget.",
+  "name": "myFinances",
+  "short_name": "myFinances",
+  "description": "Dein modernes Haushaltsbuch für Einnahmen, Ausgaben und Budget.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#f3f6fb",
-  "theme_color": "#4f46e5",
+  "background_color": "#f8fafc",
+  "theme_color": "#0ea5e9",
   "icons": [
     {"src":"./icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
     {"src":"./icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
