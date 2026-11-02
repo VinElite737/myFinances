@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<!--
+  FlightDeck – Pilot Toolkit
+  Copyright © 2026 Ufuk Tezerdi. All rights reserved.
+
+  This software, including its source code, design and content, is the
+  exclusive property of Ufuk Tezerdi. No part of it may be copied, modified,
+  redistributed or used without prior written permission of the owner.
+-->
 <html lang="de">
 <head>
 <meta charset="utf-8">
@@ -14,18 +22,54 @@
 *{box-sizing:border-box}html{scroll-padding-top:20px}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}main{max-width:1180px;margin:0 auto;padding:28px 22px 48px}
 header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:18px 20px;margin-bottom:24px;background:var(--card);border:1px solid var(--bd);border-radius:16px;box-shadow:var(--shadow)}.brand{display:flex;align-items:center;gap:12px;margin-right:auto;min-width:210px}.brand-mark{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;box-shadow:0 4px 12px rgba(14,165,233,.25)}h1{font-size:21px;line-height:1.2;letter-spacing:-.5px;margin:0}.brand-sub{font-size:12px;color:var(--mu);margin-top:3px}.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 select,input,button{font:inherit;color:var(--tx)}select,input{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:10px 12px;width:100%;outline:none;transition:border-color .15s,box-shadow .15s}select:focus,input:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 3px rgba(14,165,233,.15)}
-button{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:9px 13px;cursor:pointer;transition:transform .15s,border-color .15s,background .15s}button:hover{border-color:var(--ac);transform:translateY(-1px)}button.p{background:linear-gradient(135deg,var(--ac),var(--ac2));border-color:transparent;color:#fff;font-weight:600}button.d{color:var(--out)}button.s{padding:4px 9px;font-size:13px}.toolbar select{width:auto;min-width:170px;max-width:230px}
+button{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:9px 13px;font-size:12px;cursor:pointer;transition:transform .15s,border-color .15s,background .15s}button:hover{border-color:var(--ac);transform:translateY(-1px)}button.p{background:linear-gradient(135deg,var(--ac),var(--ac2));border-color:transparent;color:#fff;font-weight:600}button.d{color:var(--out)}button.s{padding:4px 9px;font-size:13px}.toolbar select{width:auto;min-width:170px;max-width:230px}
 
 /* Modern Dropdown Menu */
 .menu-dropdown{position:relative}.menu-dropdown summary{list-style:none;cursor:pointer;user-select:none;border:1px solid var(--bd);border-radius:10px;padding:9px 14px;background:var(--card);font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all .2s ease}.menu-dropdown summary::-webkit-details-marker{display:none}.menu-dropdown summary:hover{border-color:var(--ac);background:var(--bg)}
-.menu-dropdown summary .arrow-icon{width:16px;height:16px;transition:transform .2s ease;stroke:var(--mu)}
+.menu-dropdown summary .arrow-icon{width:16px;height:16px;transition:transform .2s ease;stroke:var(--mu);flex-shrink:0}
 .menu-dropdown[open] summary .arrow-icon{transform:rotate(180deg);stroke:var(--ac)}
-.dropdown-panel{position:absolute;right:0;top:calc(100% + 8px);z-index:40;min-width:210px;padding:8px;background:var(--card);border:1px solid var(--bd);border-radius:14px;box-shadow:var(--shadow);display:grid;gap:4px;animation:fadeIn .15s ease}
+.dropdown-panel{position:absolute;right:0;left:auto;top:calc(100% + 8px);z-index:40;min-width:210px;padding:8px;background:var(--card);border:1px solid var(--bd);border-radius:14px;box-shadow:var(--shadow);display:grid;gap:4px;animation:fadeIn .15s ease}
+#hhPanel{left:0;right:auto;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 .dropdown-panel button{width:100%;text-align:left;border:0;background:transparent;transform:none;padding:10px 12px;border-radius:8px;font-weight:500;display:flex;align-items:center;gap:10px;color:var(--tx)}.dropdown-panel button:hover{background:var(--bg);color:var(--ac)}
 
-/* Custom File Upload Button Styling */
-.file-upload-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;background:linear-gradient(135deg,var(--ac),var(--ac2));border:1px solid transparent;border-radius:10px;padding:9px 13px;color:#fff;font-weight:600;transition:transform .15s,border-color .15s,background .15s}.file-upload-btn:hover{transform:translateY(-1px);border-color:var(--ac)}
+/* Text-Kürzung für das Haushalts-Dropdown, damit es nicht überlappt */
+#hhCurrentName {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 105px;
+  display: inline-block;
+  vertical-align: middle;
+}
+#hhPanel button {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Custom File Upload Button Styling & Download Button Width */
+.file-upload-btn, #ex {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  cursor:pointer;
+  background:linear-gradient(135deg,var(--ac),var(--ac2));
+  border:1px solid transparent;
+  border-radius:10px;
+  padding:9px 13px;
+  color:#fff;
+  font-weight:600;
+  font-size: 12px;
+  width:100%;
+  text-align:center;
+  transition:transform .15s,border-color .15s,background .15s;
+}
+.file-upload-btn:hover, #ex:hover {
+  transform:translateY(-1px);
+  border-color:var(--ac);
+}
 
 #app>.grid{margin-bottom:14px}.grid{display:grid;gap:14px}.kpis{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin-bottom:16px}.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;box-shadow:var(--shadow);min-width:0}.kpi{position:relative;overflow:hidden}.kpi:after{content:"";position:absolute;right:-22px;top:-25px;width:90px;height:90px;border-radius:50%;background:var(--ac);opacity:.06}.kpi small{color:var(--mu);display:block;font-size:13px;margin-bottom:9px}.kpi b{font-size:clamp(21px,2.5vw,27px);letter-spacing:-.7px;overflow-wrap:anywhere}.in{color:var(--in)}.out{color:var(--out)}.ov{grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));margin-bottom:16px}.bar{display:grid;grid-template-columns:105px minmax(30px,1fr) 90px;gap:10px;align-items:center;margin:12px 0;font-size:13px}.bar i{display:block;height:8px;border-radius:99px;background:linear-gradient(90deg,var(--ac),var(--ac2));min-width:2px}.bar span:last-child{text-align:right;font-variant-numeric:tabular-nums}.ph{display:flex;align-items:center;gap:8px;margin-bottom:14px}.ph h2{margin-right:auto;font-size:16px;letter-spacing:-.2px}.sec{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:16px 0 5px}.sec b{font-size:13px}.sum{display:flex;justify-content:space-between;gap:8px;padding:11px 12px;border-radius:10px;margin-top:14px;font-weight:650}.empty{color:var(--mu);font-size:13px;padding:10px 0}table{width:100%;border-collapse:collapse;font-size:13px}th{color:var(--mu);font-weight:600;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding:7px 6px}td{padding:10px 6px;border-top:1px solid var(--bd)}td.n,th.n{text-align:right;white-space:nowrap}td.a{text-align:right;white-space:nowrap}.tag{font-size:11px;color:var(--mu)}.k{font-weight:700;letter-spacing:1px;padding:3px 9px}textarea{width:100%;min-height:80px;background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:10px;padding:10px;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace}#menu{position:fixed;z-index:50;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:5px;min-width:160px;box-shadow:var(--shadow)}#menu[hidden]{display:none}#menu button{display:block;width:100%;text-align:left;border:0;background:none;padding:9px 11px;border-radius:6px}#menu button:hover{background:var(--bg)}button.x{background:var(--out);border-color:var(--out);color:#fff}dialog{border:1px solid var(--bd);border-radius:16px;background:var(--card);color:var(--tx);width:min(480px,92vw);padding:22px;box-shadow:var(--shadow)}dialog::backdrop{background:rgba(15,23,42,.4);backdrop-filter:blur(3px)}dialog h2{font-size:18px;margin:0 0 10px 0}dialog p{margin:10px 0 0;color:var(--mu)}label{display:block;font-size:12px;font-weight:600;color:var(--mu);margin:13px 0 5px}.row{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
 .settings-section{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--bd)}.settings-section:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}.settings-title{font-weight:700;font-size:14px;color:var(--tx);margin-bottom:8px;display:flex;align-items:center;gap:6px}
@@ -47,7 +91,7 @@ button{background:var(--card);border:1px solid var(--bd);border-radius:10px;padd
     <div><h1>myFinances</h1><div class="brand-sub" id="txtSub">Deine Finanzen im Überblick</div></div>
   </div>
   <div class="toolbar">
-    <div style="display:flex;align-items:center;gap:6px;">
+    <div style="display:flex;align-items:center;gap:6px;min-width:0;">
       <details class="menu-dropdown" id="hhDropdown">
         <summary>
           <span id="hhCurrentName">Haushalt auswählen</span>
@@ -55,7 +99,7 @@ button{background:var(--card);border:1px solid var(--bd);border-radius:10px;padd
         </summary>
         <div class="dropdown-panel" id="hhPanel"></div>
       </details>
-      <button id="hMenu" style="padding: 10px 12px; display: inline-flex; align-items: center; justify-content: center;" title="Haushalt verwalten">✏️</button>
+      <button id="hMenu" style="padding: 10px 12px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;" title="Haushalt verwalten">✏️</button>
     </div>
     <details class="menu-dropdown">
       <summary>
@@ -142,9 +186,8 @@ const I18N = {
     freqLabel: "Rhythmus",
     exportLabel: "Export (Sicherung aller Haushalte)",
     downloadFileBtn: "Als Datei herunterladen",
-    copyTextBtn: "Text kopieren",
     importLabel: "Import",
-    selectFileBtn: "Datei auswählen",
+    selectFileBtn: "📂 Datei auswählen",
     importPlaceholder: "…oder gesicherten JSON-Text hier einfügen",
     renameTitle: "Name",
     freqMonthly: "monatlich",
@@ -209,8 +252,7 @@ const I18N = {
     catLabel: "Category",
     freqLabel: "Frequency",
     exportLabel: "Export (Backup all households)",
-    downloadFileBtn: "📥 Download as file",
-    copyTextBtn: "📋 Copy text",
+    downloadFileBtn: "Download as file",
     importLabel: "Import",
     selectFileBtn: "📂 Select file",
     importPlaceholder: "...or paste saved JSON text here",
@@ -277,8 +319,7 @@ const I18N = {
     catLabel: "Kategori",
     freqLabel: "Sıklık",
     exportLabel: "Dışa Aktar (Tüm haneleri yedekle)",
-    downloadFileBtn: "📥 Dosya Olarak İndir",
-    copyTextBtn: "📋 Metni Kopyala",
+    downloadFileBtn: "Dosya olarak indir",
     importLabel: "İçe Aktar",
     selectFileBtn: "📂 Dosya Seç",
     importPlaceholder: "...veya kaydedilmiş JSON metnini buraya yapıştırın",
@@ -429,11 +470,9 @@ function dataDlg(){
   document.querySelectorAll(".menu-dropdown").forEach(d=>d.removeAttribute("open"));
   dlg.innerHTML=`<h2>${t('exportImport')}</h2>
   <label>${t('exportLabel')}</label>
-  <div class="row" style="margin:0 0 10px;justify-content:flex-start;gap:8px;">
-    <button id="ex" class="p">${t('downloadFileBtn')}</button>
-    <button id="cp">${t('copyTextBtn')}</button>
+  <div style="margin:0 0 10px;">
+    <button id="ex">${t('downloadFileBtn')}</button>
   </div>
-  <textarea id="et" readonly></textarea>
   <label style="margin-top:16px;">${t('importLabel')}</label>
   <div style="margin-bottom:8px;">
     <label for="fi" class="file-upload-btn">${t('selectFileBtn')}</label>
@@ -444,12 +483,12 @@ function dataDlg(){
   <div class="row"><button id="cx">${t('close')}</button><button id="ok" class="p">${t('importBtn')}</button></div>`;
   dlg.showModal();
   const $=id=>document.getElementById(id),ms=msgText=>$("ms").textContent=msgText;
-  $("et").value=snapshot();
+  const hiddenSnapshot = snapshot();
   $("cx").onclick=()=>dlg.close();
   
   $("ex").onclick=()=>{
     try {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent($("et").value);
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(hiddenSnapshot);
       const downloadAnchor = document.createElement('a');
       downloadAnchor.setAttribute("href", dataStr);
       downloadAnchor.setAttribute("download", `myfinances-${new Date().toISOString().slice(0,10)}.json`);
@@ -462,12 +501,6 @@ function dataDlg(){
     }
   };
   
-  $("cp").onclick=async()=>{
-    const txt=$("et").value;
-    try{await navigator.clipboard.writeText(txt);ms("Copied.");return}catch(x){}
-    $("et").select();let k=false;try{k=document.execCommand("copy")}catch(x){}
-    ms(k?"Copied!":"Manual copy required.");
-  };
   $("fi").onchange=async ev=>{const f=ev.target.files[0];if(!f)return;
     try{$("it").value=await f.text();ms(settings.lang==='tr' ? "Dosya yüklendi – şimdi 'İçe Aktar' butonuna tıklayın." : settings.lang==='en' ? "File loaded – now click 'Import'." : "Datei geladen – jetzt auf „Importieren“ klicken.")}catch(x){ms("Error reading file.")}};
   $("ok").onclick=()=>{
@@ -578,118 +611,53 @@ function renderLegalPage(type) {
         Rechteinhabers.
       </p>
     `;
-  } else {
+} else {
     content = `
-      <h3>${t('dataPrivacy')}</h3>
+  <h3>Impressum</h3>
 
-      <p><strong>Datenschutzerklärung – myFinances</strong></p>
-      <p><em>Stand: November 2026</em></p>
+  <h4>Angaben gemäß § 5 DDG</h4>
+  <p>
+    <strong>[Vor- und Nachname]</strong><br>
+    [Straße und Hausnummer]<br>
+    [PLZ und Ort]<br>
+    Deutschland
+  </p>
 
-      <h4>1. Allgemeine Hinweise</h4>
-      <p>
-        Der Schutz deiner persönlichen Daten ist uns wichtig. Die App myFinances
-        wurde so entwickelt, dass deine eingegebenen Finanz- und Haushaltsdaten
-        grundsätzlich lokal auf deinem Gerät beziehungsweise in deinem Browser
-        gespeichert werden.
-      </p>
-      <p>
-        Über die App selbst werden keine Finanzdaten an eine zentrale Datenbank,
-        einen Cloud-Dienst oder einen Server des Betreibers übertragen.
-      </p>
+  <h4>Kontakt</h4>
+  <p>
+    E-Mail: u.tezerdi@gmail.com
+  </p>
 
-      <h4>2. Welche Daten werden gespeichert?</h4>
-      <p>
-        Bei der Nutzung von myFinances können folgende Informationen eingegeben
-        und lokal gespeichert werden:
-      </p>
-      <ul>
-        <li>Haushalte und Personen</li>
-        <li>Einnahmen und Ausgaben</li>
-        <li>Beträge, Kategorien und Buchungsinformationen</li>
-        <li>Einstellungen wie Sprache und Design</li>
-      </ul>
+  <h4>Verantwortlich für den Inhalt</h4>
+  <p>
+    Ufuk Tezerdi<br>
+    [Anschrift wie oben]
+  </p>
 
-      <h4>3. Lokale Datenspeicherung</h4>
-      <p>
-        Die Speicherung erfolgt über die LocalStorage-Funktion deines Browsers.
-        Die Daten verbleiben auf dem verwendeten Gerät und sind grundsätzlich
-        nur über den jeweiligen Browser zugänglich.
-      </p>
-      <p>
-        Es findet keine automatische Synchronisierung zwischen verschiedenen
-        Geräten oder Browsern statt.
-      </p>
+  <h4>Haftung für Inhalte</h4>
+  <p>
+    Die Inhalte dieser App wurden mit größtmöglicher Sorgfalt erstellt.
+    Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte
+    kann jedoch keine Gewähr übernommen werden.
+  </p>
 
-      <h4>4. Keine Benutzerkonten und keine Cloud-Datenbank</h4>
-      <p>
-        myFinances benötigt keine Registrierung und kein Benutzerkonto.
-        Die App verwendet keine zentrale Datenbank zur Speicherung deiner
-        Finanzdaten.
-      </p>
+  <h4>Haftung für Links</h4>
+  <p>
+    Diese App kann Links zu externen Websites Dritter enthalten.
+    Auf deren Inhalte haben wir keinen Einfluss. Für die Inhalte
+    der verlinkten Seiten ist stets der jeweilige Anbieter oder
+    Betreiber verantwortlich.
+  </p>
 
-      <h4>5. Weitergabe von Daten</h4>
-      <p>
-        Die über myFinances eingegebenen Finanzdaten werden durch die App
-        nicht an Dritte weitergegeben. Es werden innerhalb der App keine
-        Analyse- oder Tracking-Dienste und keine Werbedienste eingesetzt.
-      </p>
-
-      <h4>6. Datensicherung und Datenverlust</h4>
-      <p>
-        Da deine Daten lokal im Browser gespeichert werden, bist du selbst
-        für deren Sicherung verantwortlich. Du kannst die Exportfunktion
-        der App nutzen, um deine Daten als JSON-Datei zu sichern und später
-        wieder zu importieren.
-      </p>
-      <p>
-        Werden die Browserdaten gelöscht, der Browser deinstalliert oder
-        die lokale Speicherung anderweitig entfernt, können deine Daten
-        unwiederbringlich verloren gehen.
-      </p>
-
-      <h4>7. Löschung deiner Daten</h4>
-      <p>
-        Du kannst deine gespeicherten Daten direkt innerhalb der App oder
-        durch Löschen der entsprechenden Browserdaten entfernen.
-        Eine separate Anfrage an den Betreiber ist für die Löschung
-        lokal gespeicherter Finanzdaten nicht erforderlich.
-      </p>
-
-      <h4>8. Hosting und technische Zugriffsdaten</h4>
-      <p>
-        Beim Aufruf der App über eine Website kann der Hosting-Anbieter
-        technisch erforderliche Informationen verarbeiten, beispielsweise
-        IP-Adressen, Zeitpunkt des Zugriffs und angeforderte Dateien.
-        Diese Verarbeitung erfolgt durch den jeweiligen Hosting-Anbieter
-        und liegt außerhalb der lokalen Datenspeicherung der App.
-      </p>
-
-      <h4>9. Deine Rechte</h4>
-      <p>
-        Im Rahmen der geltenden Datenschutzgesetze, insbesondere der
-        Datenschutz-Grundverordnung (DSGVO), hast du unter anderem das
-        Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der
-        Verarbeitung und Datenübertragbarkeit sowie das Recht auf
-        Beschwerde bei einer Datenschutzaufsichtsbehörde.
-      </p>
-
-      <h4>10. Änderungen dieser Datenschutzerklärung</h4>
-      <p>
-        Diese Datenschutzerklärung kann angepasst werden, wenn sich
-        Funktionen der App oder die rechtlichen Anforderungen ändern.
-      </p>
-
-      <h4>11. Kontakt</h4>
-      <p>
-        Verantwortlich für die Datenverarbeitung im Zusammenhang mit
-        dieser App ist:
-      </p>
-      <p>
-        <strong>Ufuk Tezerdi</strong><br>
-        [Anschrift]<br>
-        E-Mail: u.tezerdi@gmail.com
-      </p>
-    `;
+  <h4>Urheberrecht</h4>
+  <p>
+    Die durch den Betreiber erstellten Inhalte und Werke in dieser
+    App unterliegen dem deutschen Urheberrecht. Eine Verwendung,
+    Vervielfältigung oder Verbreitung außerhalb der Grenzen des
+    Urheberrechts bedarf der vorherigen Zustimmung des jeweiligen
+    Rechteinhabers.
+  </p>
+`;
   }
 
   dlg.innerHTML = `
