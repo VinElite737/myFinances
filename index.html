@@ -1,28 +1,36 @@
 <!DOCTYPE html>
-<!--
-  FlightDeck – Pilot Toolkit
-  Copyright © 2026 Ufuk Tezerdi. All rights reserved.
-
-  This software, including its source code, design and content, is the
-  exclusive property of Ufuk Tezerdi. No part of it may be copied, modified,
-  redistributed or used without prior written permission of the owner.
--->
 <html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0ea5e9">
 <meta name="description" content="Dein modernes Haushaltsbuch für Einnahmen, Ausgaben und Budget.">
-<link rel="manifest" href="./manifest.json">
-<link rel="apple-touch-icon" href="./icon-192.png">
 <title>myFinances</title>
 <style>
-:root{--bg:#f8fafc;--card:#fff;--tx:#0f172a;--mu:#64748b;--bd:#e2e8f0;--ac:#0ea5e9;--ac2:#10b981;--in:#059669;--out:#e11d48;--inb:#ecfdf5;--outb:#fff1f2;--shadow:0 4px 20px -2px rgba(15,23,42,.05);box-sizing:border-box;color-scheme:light}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f172a;--card:#1e293b;--tx:#f8fafc;--mu:#94a3b8;--bd:#334155;--ac:#38bdf8;--ac2:#34d399;--in:#34d399;--out:#fb7185;--inb:#064e3b;--outb:#4c0519;--shadow:0 4px 20px -2px rgba(0,0,0,.3);color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0f172a;--card:#1e293b;--tx:#f8fafc;--mu:#94a3b8;--bd:#334155;--ac:#38bdf8;--ac2:#34d399;--in:#34d399;--out:#fb7185;--inb:#064e3b;--outb:#4c0519;--shadow:0 4px 20px -2px rgba(0,0,0,.3);color-scheme:dark}
-*{box-sizing:border-box}html{scroll-padding-top:20px}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}main{max-width:1180px;margin:0 auto;padding:28px 22px 48px}
-header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:18px 20px;margin-bottom:24px;background:var(--card);border:1px solid var(--bd);border-radius:16px;box-shadow:var(--shadow)}.brand{display:flex;align-items:center;gap:12px;margin-right:auto;min-width:210px}.brand-mark{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;box-shadow:0 4px 12px rgba(14,165,233,.25)}h1{font-size:21px;line-height:1.2;letter-spacing:-.5px;margin:0}.brand-sub{font-size:12px;color:var(--mu);margin-top:3px}.toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}select,input,button{font:inherit;color:var(--tx)}select,input{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:10px 12px;width:100%;outline:none}select:focus,input:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 3px rgba(14,165,233,.15)}button{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:9px 13px;cursor:pointer;transition:transform .15s,border-color .15s,background .15s}button:hover{border-color:var(--ac);transform:translateY(-1px)}button.p{background:linear-gradient(135deg,var(--ac),var(--ac2));border-color:transparent;color:#fff;font-weight:600}button.d{color:var(--out)}button.s{padding:4px 9px;font-size:13px}.toolbar select{width:auto;min-width:170px;max-width:230px}.menu-dropdown{position:relative}.menu-dropdown summary{list-style:none;cursor:pointer;user-select:none;border:1px solid var(--bd);border-radius:10px;padding:9px 13px;background:var(--card);font-weight:600}.menu-dropdown summary::-webkit-details-marker{display:none}.dropdown-panel{position:absolute;right:0;top:calc(100% + 8px);z-index:40;min-width:190px;padding:6px;background:var(--card);border:1px solid var(--bd);border-radius:12px;box-shadow:var(--shadow);display:grid;gap:4px}.dropdown-panel button{width:100%;text-align:left;border:0;background:transparent;transform:none}.dropdown-panel button:hover{background:var(--bg)}
-#app>.grid{margin-bottom:14px}.grid{display:grid;gap:14px}.kpis{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin-bottom:16px}.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;box-shadow:var(--shadow);min-width:0}.kpi{position:relative;overflow:hidden}.kpi:after{content:"";position:absolute;right:-22px;top:-25px;width:90px;height:90px;border-radius:50%;background:var(--ac);opacity:.06}.kpi small{color:var(--mu);display:block;font-size:13px;margin-bottom:9px}.kpi b{font-size:clamp(21px,2.5vw,27px);letter-spacing:-.7px;overflow-wrap:anywhere}.in{color:var(--in)}.out{color:var(--out)}.ov{grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));margin-bottom:16px}.bar{display:grid;grid-template-columns:105px minmax(30px,1fr) 90px;gap:10px;align-items:center;margin:12px 0;font-size:13px}.bar i{display:block;height:8px;border-radius:99px;background:linear-gradient(90deg,var(--ac),var(--ac2));min-width:2px}.bar span:last-child{text-align:right;font-variant-numeric:tabular-nums}.ph{display:flex;align-items:center;gap:8px;margin-bottom:14px}.ph h2{margin-right:auto;font-size:16px;letter-spacing:-.2px}.sec{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:16px 0 5px}.sec b{font-size:13px}.sum{display:flex;justify-content:space-between;gap:8px;padding:11px 12px;border-radius:10px;margin-top:14px;font-weight:650}.empty{color:var(--mu);font-size:13px;padding:10px 0}table{width:100%;border-collapse:collapse;font-size:13px}th{color:var(--mu);font-weight:600;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding:7px 6px}td{padding:10px 6px;border-top:1px solid var(--bd)}td.n,th.n{text-align:right;white-space:nowrap}td.a{text-align:right;white-space:nowrap}.tag{font-size:11px;color:var(--mu)}.k{font-weight:700;letter-spacing:1px;padding:3px 9px}textarea{width:100%;min-height:80px;background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:10px;padding:10px;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace}#menu{position:fixed;z-index:50;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:5px;min-width:160px;box-shadow:var(--shadow)}#menu[hidden]{display:none}#menu button{display:block;width:100%;text-align:left;border:0;background:none;padding:9px 11px}#menu button:hover{background:var(--bg)}button.x{background:var(--out);border-color:var(--out);color:#fff}dialog{border:1px solid var(--bd);border-radius:16px;background:var(--card);color:var(--tx);width:min(420px,92vw);padding:22px;box-shadow:var(--shadow)}dialog::backdrop{background:rgba(15,23,42,.4);backdrop-filter:blur(3px)}dialog h2{font-size:18px;margin:0}dialog p{margin:10px 0 0;color:var(--mu)}label{display:block;font-size:12px;font-weight:600;color:var(--mu);margin:13px 0 5px}.row{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
+:root{--bg:#f8fafc;--card:#ffffff;--tx:#0f172a;--mu:#64748b;--bd:#e2e8f0;--ac:#0ea5e9;--ac2:#10b981;--in:#059669;--out:#e11d48;--inb:#ecfdf5;--outb:#fff1f2;--shadow:0 4px 20px -2px rgba(15,23,42,.08);box-sizing:border-box;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f172a;--card:#1e293b;--tx:#f8fafc;--mu:#94a3b8;--bd:#334155;--ac:#38bdf8;--ac2:#34d399;--in:#34d399;--out:#fb7185;--inb:#064e3b;--outb:#4c0519;--shadow:0 4px 20px -2px rgba(0,0,0,.4);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f172a;--card:#1e293b;--tx:#f8fafc;--mu:#94a3b8;--bd:#334155;--ac:#38bdf8;--ac2:#34d399;--in:#34d399;--out:#fb7185;--inb:#064e3b;--outb:#4c0519;--shadow:0 4px 20px -2px rgba(0,0,0,.4);color-scheme:dark}
+:root[data-theme="light"]{--bg:#f8fafc;--card:#ffffff;--tx:#0f172a;--mu:#64748b;--bd:#e2e8f0;--ac:#0ea5e9;--ac2:#10b981;--in:#059669;--out:#e11d48;--inb:#ecfdf5;--outb:#fff1f2;--shadow:0 4px 20px -2px rgba(15,23,42,.08);color-scheme:light}
+*{box-sizing:border-box}html{scroll-padding-top:20px}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}main{max-width:1180px;margin:0 auto;padding:28px 22px 48px}
+header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:18px 20px;margin-bottom:24px;background:var(--card);border:1px solid var(--bd);border-radius:16px;box-shadow:var(--shadow)}.brand{display:flex;align-items:center;gap:12px;margin-right:auto;min-width:210px}.brand-mark{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;box-shadow:0 4px 12px rgba(14,165,233,.25)}h1{font-size:21px;line-height:1.2;letter-spacing:-.5px;margin:0}.brand-sub{font-size:12px;color:var(--mu);margin-top:3px}.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+select,input,button{font:inherit;color:var(--tx)}select,input{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:10px 12px;width:100%;outline:none;transition:border-color .15s,box-shadow .15s}select:focus,input:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 3px rgba(14,165,233,.15)}
+button{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:9px 13px;cursor:pointer;transition:transform .15s,border-color .15s,background .15s}button:hover{border-color:var(--ac);transform:translateY(-1px)}button.p{background:linear-gradient(135deg,var(--ac),var(--ac2));border-color:transparent;color:#fff;font-weight:600}button.d{color:var(--out)}button.s{padding:4px 9px;font-size:13px}.toolbar select{width:auto;min-width:170px;max-width:230px}
+
+/* Modern Dropdown Menu */
+.menu-dropdown{position:relative}.menu-dropdown summary{list-style:none;cursor:pointer;user-select:none;border:1px solid var(--bd);border-radius:10px;padding:9px 14px;background:var(--card);font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all .2s ease}.menu-dropdown summary::-webkit-details-marker{display:none}.menu-dropdown summary:hover{border-color:var(--ac);background:var(--bg)}
+.menu-dropdown summary .arrow-icon{width:16px;height:16px;transition:transform .2s ease;stroke:var(--mu)}
+.menu-dropdown[open] summary .arrow-icon{transform:rotate(180deg);stroke:var(--ac)}
+.dropdown-panel{position:absolute;right:0;top:calc(100% + 8px);z-index:40;min-width:210px;padding:8px;background:var(--card);border:1px solid var(--bd);border-radius:14px;box-shadow:var(--shadow);display:grid;gap:4px;animation:fadeIn .15s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.dropdown-panel button{width:100%;text-align:left;border:0;background:transparent;transform:none;padding:10px 12px;border-radius:8px;font-weight:500;display:flex;align-items:center;gap:10px;color:var(--tx)}.dropdown-panel button:hover{background:var(--bg);color:var(--ac)}
+
+/* Custom File Upload Button Styling */
+.file-upload-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;background:linear-gradient(135deg,var(--ac),var(--ac2));border:1px solid transparent;border-radius:10px;padding:9px 13px;color:#fff;font-weight:600;transition:transform .15s,border-color .15s,background .15s}.file-upload-btn:hover{transform:translateY(-1px);border-color:var(--ac)}
+
+#app>.grid{margin-bottom:14px}.grid{display:grid;gap:14px}.kpis{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin-bottom:16px}.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;box-shadow:var(--shadow);min-width:0}.kpi{position:relative;overflow:hidden}.kpi:after{content:"";position:absolute;right:-22px;top:-25px;width:90px;height:90px;border-radius:50%;background:var(--ac);opacity:.06}.kpi small{color:var(--mu);display:block;font-size:13px;margin-bottom:9px}.kpi b{font-size:clamp(21px,2.5vw,27px);letter-spacing:-.7px;overflow-wrap:anywhere}.in{color:var(--in)}.out{color:var(--out)}.ov{grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));margin-bottom:16px}.bar{display:grid;grid-template-columns:105px minmax(30px,1fr) 90px;gap:10px;align-items:center;margin:12px 0;font-size:13px}.bar i{display:block;height:8px;border-radius:99px;background:linear-gradient(90deg,var(--ac),var(--ac2));min-width:2px}.bar span:last-child{text-align:right;font-variant-numeric:tabular-nums}.ph{display:flex;align-items:center;gap:8px;margin-bottom:14px}.ph h2{margin-right:auto;font-size:16px;letter-spacing:-.2px}.sec{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:16px 0 5px}.sec b{font-size:13px}.sum{display:flex;justify-content:space-between;gap:8px;padding:11px 12px;border-radius:10px;margin-top:14px;font-weight:650}.empty{color:var(--mu);font-size:13px;padding:10px 0}table{width:100%;border-collapse:collapse;font-size:13px}th{color:var(--mu);font-weight:600;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding:7px 6px}td{padding:10px 6px;border-top:1px solid var(--bd)}td.n,th.n{text-align:right;white-space:nowrap}td.a{text-align:right;white-space:nowrap}.tag{font-size:11px;color:var(--mu)}.k{font-weight:700;letter-spacing:1px;padding:3px 9px}textarea{width:100%;min-height:80px;background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:10px;padding:10px;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace}#menu{position:fixed;z-index:50;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:5px;min-width:160px;box-shadow:var(--shadow)}#menu[hidden]{display:none}#menu button{display:block;width:100%;text-align:left;border:0;background:none;padding:9px 11px;border-radius:6px}#menu button:hover{background:var(--bg)}button.x{background:var(--out);border-color:var(--out);color:#fff}dialog{border:1px solid var(--bd);border-radius:16px;background:var(--card);color:var(--tx);width:min(480px,92vw);padding:22px;box-shadow:var(--shadow)}dialog::backdrop{background:rgba(15,23,42,.4);backdrop-filter:blur(3px)}dialog h2{font-size:18px;margin:0 0 10px 0}dialog p{margin:10px 0 0;color:var(--mu)}label{display:block;font-size:12px;font-weight:600;color:var(--mu);margin:13px 0 5px}.row{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
+.settings-section{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--bd)}.settings-section:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}.settings-title{font-weight:700;font-size:14px;color:var(--tx);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.legal-card{background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:12px;margin-top:8px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .15s ease}.legal-card:hover{border-color:var(--ac);transform:translateY(-1px)}
+.legal-content{max-height:360px;overflow-y:auto;padding-right:6px;font-size:13px;line-height:1.6}
 @media(max-width:640px){main{padding:12px 10px 28px}header{padding:14px;border-radius:15px;gap:12px}.brand{width:100%;margin-right:0}.toolbar{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto}.toolbar select{width:100%;max-width:none;min-width:0}.menu-dropdown{justify-self:end}.dropdown-panel{right:0}.card{padding:14px}.kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.kpi b{font-size:20px}.ov{grid-template-columns:minmax(0,1fr)}.bar{grid-template-columns:90px minmax(20px,1fr) 80px;gap:7px}.ph h2{font-size:15px}table{font-size:12px}td{padding:8px 4px}th{padding:5px 4px}}
 </style>
 </head>
@@ -36,15 +44,30 @@ header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:18px 20px
         <polyline points="9 22 9 12 15 12 15 22"></polyline>
       </svg>
     </div>
-    <div><h1>myFinances</h1><div class="brand-sub">Deine Finanzen im Überblick</div></div>
+    <div><h1>myFinances</h1><div class="brand-sub" id="txtSub">Deine Finanzen im Überblick</div></div>
   </div>
   <div class="toolbar">
-    <select id="hh" aria-label="Haushalt auswählen"></select>
-    <details class="menu-dropdown"><summary>Menü</summary><div class="dropdown-panel">
-      <button id="hAdd">＋ Neuer Haushalt</button>
-      <button id="hData">⇅ Export / Import</button>
-      <button id="hMenu">⚙ Haushalt verwalten</button>
-    </div></details>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <details class="menu-dropdown" id="hhDropdown">
+        <summary>
+          <span id="hhCurrentName">Haushalt auswählen</span>
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </summary>
+        <div class="dropdown-panel" id="hhPanel"></div>
+      </details>
+      <button id="hMenu" style="padding: 10px 12px; display: inline-flex; align-items: center; justify-content: center;" title="Haushalt verwalten">✏️</button>
+    </div>
+    <details class="menu-dropdown">
+      <summary>
+        <span id="menuLabelText">Menü</span>
+        <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </summary>
+      <div class="dropdown-panel">
+        <button id="hAdd"><span>＋</span> <span id="lblAdd">Neuer Haushalt</span></button>
+        <button id="hData"><span>⇅</span> <span id="lblData">Export / Import</span></button>
+        <button id="hSettings"><span>⚙</span> <span id="lblSettings">Einstellungen</span></button>
+      </div>
+    </details>
   </div>
 </header>
 <div id="app"></div>
@@ -57,6 +80,237 @@ const CATS=["Wohnen","Kredite","Versicherungen","Entertainment","Sparen","Gesund
 const ICATS=["Gehalt","Nebenverdienst","Sonstiges"];
 const FREQ={m:["monatlich",1],q:["vierteljährlich",3],y:["jährlich",12]};
 const KEY="myfinances-v1";
+const SETTINGS_KEY="myfinances-settings-v1";
+
+const I18N = {
+  de: {
+    sub: "Deine Finanzen im Überblick",
+    menu: "Menü",
+    newHH: "Neuer Haushalt",
+    exportImport: "Export / Import",
+    settings: "Einstellungen",
+    manageHH: "Haushalt verwalten",
+    incomeMonth: "Einnahmen / Monat",
+    expenseMonth: "Ausgaben / Monat",
+    availableBudget: "Verfügbares Budget",
+    expenseYear: "Ausgaben / Jahr",
+    overviewPerson: "Übersicht pro Person",
+    person: "Person",
+    income: "Einnahmen",
+    expense: "Ausgaben",
+    balance: "Saldo",
+    noPersons: "Noch keine Personen.",
+    expenseCat: "Ausgaben nach Kategorie",
+    noExpenses: "Keine Ausgaben.",
+    personsHeader: "Personen",
+    addPerson: "+ Person",
+    add: "+ Hinzufügen",
+    noEntries: "Noch keine Einträge.",
+    saldoMonth: "Saldo / Monat",
+    cancel: "Abbrechen",
+    save: "Speichern",
+    close: "Schließen",
+    importBtn: "Importieren",
+    settingsTitle: "Einstellungen",
+    appearance: "🎨 Erscheinungsbild",
+    designMode: "Design-Modus",
+    systemTheme: "💻 Systemabhängig",
+    lightTheme: "☀️ Hell (Light)",
+    darkTheme: "🌙 Dunkel (Dark)",
+    language: "🌐 Sprache / Language",
+    selectLang: "Sprache auswählen",
+    legal: "⚖️ Rechtliches",
+    impressumTitle: "Impressum",
+    impressumSub: "Anbieterkennzeichnung & Kontakt",
+    dataPrivacy: "Datenschutz",
+    dataPrivacySub: "Hinweise zur Datenverarbeitung",
+    ready: "Fertig",
+    backToSettings: "← Zurück zu Einstellungen",
+    rename: "Umbenennen",
+    delete: "Löschen",
+    renameHH: "Haushalt umbenennen",
+    renamePerson: "Person umbenennen",
+    deleteHHConfirmTitle: "Haushalt löschen?",
+    deletePersonConfirmTitle: "Person löschen?",
+    addIncome: "Einnahme hinzufügen",
+    editIncome: "Einnahme bearbeiten",
+    addExpense: "Ausgabe hinzufügen",
+    editExpense: "Ausgabe bearbeiten",
+    nameLabel: "Bezeichnung",
+    amountLabel: "Betrag (€)",
+    catLabel: "Kategorie",
+    freqLabel: "Rhythmus",
+    exportLabel: "Export (Sicherung aller Haushalte)",
+    downloadFileBtn: "Als Datei herunterladen",
+    copyTextBtn: "Text kopieren",
+    importLabel: "Import",
+    selectFileBtn: "Datei auswählen",
+    importPlaceholder: "…oder gesicherten JSON-Text hier einfügen",
+    renameTitle: "Name",
+    freqMonthly: "monatlich",
+    freqQuarterly: "vierteljährlich",
+    freqYearly: "jährlich"
+  },
+  en: {
+    sub: "Your finances at a glance",
+    menu: "Menu",
+    newHH: "New Household",
+    exportImport: "Export / Import",
+    settings: "Settings",
+    manageHH: "Manage Household",
+    incomeMonth: "Income / Month",
+    expenseMonth: "Expenses / Month",
+    availableBudget: "Available Budget",
+    expenseYear: "Expenses / Year",
+    overviewPerson: "Overview per Person",
+    person: "Person",
+    income: "Income",
+    expense: "Expenses",
+    balance: "Balance",
+    noPersons: "No persons yet.",
+    expenseCat: "Expenses by Category",
+    noExpenses: "No expenses.",
+    personsHeader: "Persons",
+    addPerson: "+ Person",
+    add: "+ Add",
+    noEntries: "No entries yet.",
+    saldoMonth: "Balance / Month",
+    cancel: "Cancel",
+    save: "Save",
+    close: "Close",
+    importBtn: "Import",
+    settingsTitle: "⚙️ Settings",
+    appearance: "🎨 Appearance",
+    designMode: "Design Mode",
+    systemTheme: "💻 System-dependent",
+    lightTheme: "☀️ Light",
+    darkTheme: "🌙 Dark",
+    language: "🌐 Language",
+    selectLang: "Select Language",
+    legal: "⚖️ Legal",
+    impressumTitle: "Imprint",
+    impressumSub: "Provider Identification & Contact",
+    dataPrivacy: "Data Privacy",
+    dataPrivacySub: "Information on data processing",
+    ready: "Done",
+    backToSettings: "← Back to Settings",
+    rename: "Rename",
+    delete: "Delete",
+    renameHH: "Rename Household",
+    renamePerson: "Rename Person",
+    deleteHHConfirmTitle: "Delete household?",
+    deletePersonConfirmTitle: "Delete person?",
+    addIncome: "Add Income",
+    editIncome: "Edit Income",
+    addExpense: "Add Expense",
+    editExpense: "Edit Expense",
+    nameLabel: "Description",
+    amountLabel: "Amount (€)",
+    catLabel: "Category",
+    freqLabel: "Frequency",
+    exportLabel: "Export (Backup all households)",
+    downloadFileBtn: "📥 Download as file",
+    copyTextBtn: "📋 Copy text",
+    importLabel: "Import",
+    selectFileBtn: "📂 Select file",
+    importPlaceholder: "...or paste saved JSON text here",
+    renameTitle: "Name",
+    freqMonthly: "monthly",
+    freqQuarterly: "quarterly",
+    freqYearly: "yearly"
+  },
+  tr: {
+    sub: "Finansal Durumunuz",
+    menu: "Menü",
+    newHH: "Yeni Hane",
+    exportImport: "Dışa / İçe Aktar",
+    settings: "Ayarlar",
+    manageHH: "Haneyi Yönet",
+    incomeMonth: "Gelir / Ay",
+    expenseMonth: "Gider / Ay",
+    availableBudget: "Kullanılabilir Bütçe",
+    expenseYear: "Gider / Yıl",
+    overviewPerson: "Kişi Başına Genel Bakış",
+    person: "Kişi",
+    income: "Gelirler",
+    expense: "Giderler",
+    balance: "Bakiye",
+    noPersons: "Henüz kimse yok.",
+    expenseCat: "Kategorilere Göre Giderler",
+    noExpenses: "Gider yok.",
+    personsHeader: "Kişiler",
+    addPerson: "+ Kişi",
+    add: "+ Ekle",
+    noEntries: "Henüz kayıt yok.",
+    saldoMonth: "Bakiye / Ay",
+    cancel: "İptal",
+    save: "Kaydet",
+    close: "Kapat",
+    importBtn: "İçe Aktar",
+    settingsTitle: "⚙️ Ayarlar",
+    appearance: "🎨 Görünüm",
+    designMode: "Tema Modu",
+    systemTheme: "💻 Sistem Uyumlu",
+    lightTheme: "☀️ Açık (Light)",
+    darkTheme: "🌙 Koyu (Dark)",
+    language: "🌐 Dil / Language",
+    selectLang: "Dil Seçin",
+    legal: "⚖️ Yasal",
+    impressumTitle: "Künye",
+    impressumSub: "Sağlayıcı Bilgileri & İletişim",
+    dataPrivacy: "Gizlilik",
+    dataPrivacySub: "Veri işleme bilgileri",
+    ready: "Tamam",
+    backToSettings: "← Ayarlara Dön",
+    rename: "Yeniden Adlandır",
+    delete: "Sil",
+    renameHH: "Haneyi Yeniden Adlandır",
+    renamePerson: "Kişiyi Yeniden Adlandır",
+    deleteHHConfirmTitle: "Hane silinsin mi?",
+    deletePersonConfirmTitle: "Kişi silinsin mi?",
+    addIncome: "Gelir Ekle",
+    editIncome: "Geliri Düzenle",
+    addExpense: "Gider Ekle",
+    editExpense: "Gideri Düzenle",
+    nameLabel: "Açıklama",
+    amountLabel: "Tutar (€)",
+    catLabel: "Kategori",
+    freqLabel: "Sıklık",
+    exportLabel: "Dışa Aktar (Tüm haneleri yedekle)",
+    downloadFileBtn: "📥 Dosya Olarak İndir",
+    copyTextBtn: "📋 Metni Kopyala",
+    importLabel: "İçe Aktar",
+    selectFileBtn: "📂 Dosya Seç",
+    importPlaceholder: "...veya kaydedilmiş JSON metnini buraya yapıştırın",
+    renameTitle: "Ad",
+    freqMonthly: "aylık",
+    freqQuarterly: "üç aylık",
+    freqYearly: "yıllık"
+  }
+};
+
+let settings = { theme: 'system', lang: 'de' };
+try {
+  const saved = localStorage.getItem(SETTINGS_KEY);
+  if(saved) settings = Object.is(settings, JSON.parse(saved)) || Object.assign(settings, JSON.parse(saved));
+} catch(e){}
+
+function t(key) {
+  const dict = I18N[settings.lang] || I18N.de;
+  return dict[key] || I18N.de[key] || key;
+}
+
+function applyTheme(theme) {
+  settings.theme = theme;
+  try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch(e){}
+  if (theme === 'system') {
+    document.documentElement.removeAttribute('data-theme');
+  } else {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
+}
+applyTheme(settings.theme);
+
 let uid=()=>Math.random().toString(36).slice(2,9);
 function blank(){return{cur:null,hh:[{id:uid(),name:"Mein Haushalt",persons:[]}]}}
 let S;
@@ -71,62 +325,96 @@ const eur=n=>n.toLocaleString("de-DE",{style:"currency",currency:"EUR"});
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const dlg=document.getElementById("dlg");
 
+function updateStaticTexts() {
+  document.getElementById("txtSub").textContent = t('sub');
+  document.getElementById("menuLabelText").textContent = t('menu');
+  document.getElementById("lblAdd").textContent = t('newHH');
+  document.getElementById("lblData").textContent = t('exportImport');
+  document.getElementById("lblSettings").textContent = t('settings');
+}
+
 function render(){
-  const sel=document.getElementById("hh");
-  sel.innerHTML=S.hh.map(h=>`<option value="${h.id}"${h.id===S.cur?" selected":""}>${esc(h.name)}</option>`).join("");
+  updateStaticTexts();
+  const currentH = H();
+  document.getElementById("hhCurrentName").textContent = currentH ? currentH.name : t('selectLang');
+  document.getElementById("hhPanel").innerHTML = S.hh.map(h => `<button data-id="${h.id}">${esc(h.name)}</button>`).join("");
+  
   const h=H();
   const inc=h.persons.reduce((a,p)=>a+sum(p.inc),0),exp=h.persons.reduce((a,p)=>a+sum(p.exp),0),bal=inc-exp;
   const cats={};h.persons.forEach(p=>p.exp.forEach(x=>cats[x.cat]=(cats[x.cat]||0)+mo(x)));
   const cl=Object.entries(cats).sort((a,b)=>b[1]-a[1]),mx=cl.length?cl[0][1]:1;
   let o=`<div class="grid kpis">
-   <div class="card kpi"><small>Einnahmen / Monat</small><b class="in">${eur(inc)}</b></div>
-   <div class="card kpi"><small>Ausgaben / Monat</small><b class="out">${eur(exp)}</b></div>
-   <div class="card kpi"><small>Verfügbares Budget</small><b class="${bal<0?"out":"in"}">${eur(bal)}</b></div>
-   <div class="card kpi"><small>Ausgaben / Jahr</small><b>${eur(exp*12)}</b></div></div>
-   <div class="grid ov"><div class="card"><div class="ph"><h2>Übersicht pro Person</h2></div>
-   <table><tr><th>Person</th><th class="n">Einnahmen</th><th class="n">Ausgaben</th><th class="n">Saldo</th></tr>
-   ${h.persons.map(p=>{const i=sum(p.inc),a=sum(p.exp);return`<tr><td>${esc(p.name)}</td><td class="n in">${eur(i)}</td><td class="n out">${eur(a)}</td><td class="n">${eur(i-a)}</td></tr>`}).join("")||`<tr><td colspan="4" class="empty">Noch keine Personen.</td></tr>`}
+   <div class="card kpi"><small>${t('incomeMonth')}</small><b class="in">${eur(inc)}</b></div>
+   <div class="card kpi"><small>${t('expenseMonth')}</small><b class="out">${eur(exp)}</b></div>
+   <div class="card kpi"><small>${t('availableBudget')}</small><b class="${bal<0?"out":"in"}">${eur(bal)}</b></div>
+   <div class="card kpi"><small>${t('expenseYear')}</small><b>${eur(exp*12)}</b></div></div>
+   <div class="grid ov"><div class="card"><div class="ph"><h2>${t('overviewPerson')}</h2></div>
+   <table><tr><th>${t('person')}</th><th class="n">${t('income')}</th><th class="n">${t('expense')}</th><th class="n">${t('balance')}</th></tr>
+   ${h.persons.map(p=>{const i=sum(p.inc),a=sum(p.exp);return`<tr><td>${esc(p.name)}</td><td class="n in">${eur(i)}</td><td class="n out">${eur(a)}</td><td class="n">${eur(i-a)}</td></tr>`}).join("")||`<tr><td colspan="4" class="empty">${t('noPersons')}</td></tr>`}
    </table></div>
-   <div class="card"><div class="ph"><h2>Ausgaben nach Kategorie</h2></div>
-   ${cl.map(([c,v])=>`<div class="bar"><span>${esc(c)}</span><span><i style="width:${v/mx*100}%"></i></span><span>${eur(v)}</span></div>`).join("")||`<div class="empty">Keine Ausgaben.</div>`}</div></div>
-   <div class="ph" style="margin-top:20px"><h2 style="font-size:18px">Personen</h2><button class="p" data-a="pAdd">+ Person</button></div><div class="grid ov">`;
+   <div class="card"><div class="ph"><h2>${t('expenseCat')}</h2></div>
+   ${cl.map(([c,v])=>`<div class="bar"><span>${esc(c)}</span><span><i style="width:${v/mx*100}%"></i></span><span>${eur(v)}</span></div>`).join("")||`<div class="empty">${t('noExpenses')}</div>`}</div></div>
+   <div class="ph" style="margin-top:20px"><h2 style="font-size:18px">${t('personsHeader')}</h2><button class="p" data-a="pAdd">${t('addPerson')}</button></div><div class="grid ov">`;
   h.persons.forEach(p=>{o+=`<div class="card"><div class="ph"><h2>${esc(p.name)}</h2><button class="s k" data-a="pMenu" data-p="${p.id}" aria-label="Menü">⋯</button></div>`+
-   list(p,"inc","Einnahmen")+list(p,"exp","Ausgaben")+`<div class="sum" style="background:var(--${sum(p.inc)-sum(p.exp)<0?"outb":"inb"})"><span>Saldo / Monat</span><span>${eur(sum(p.inc)-sum(p.exp))}</span></div></div>`});
+   list(p,"inc",t('income'))+list(p,"exp",t('expense'))+`<div class="sum" style="background:var(--${sum(p.inc)-sum(p.exp)<0?"outb":"inb"})"><span>${t('saldoMonth')}</span><span>${eur(sum(p.inc)-sum(p.exp))}</span></div></div>`});
   document.getElementById("app").innerHTML=o+"</div>";
 }
-function list(p,t,title){
-  const l=p[t],c=t==="inc"?"in":"out";
-  return`<div class="sec"><b>${title} <span class="${c}">${eur(sum(l))}</span></b><button class="s" data-a="eAdd" data-p="${p.id}" data-t="${t}">+ Hinzufügen</button></div>`+
-  (l.length?`<table>${l.map(x=>`<tr><td>${esc(x.name)}<div class="tag">${esc(x.cat)} · ${FREQ[x.freq][0]}</div></td>
+function list(p,tName,title){
+  const l=p[tName],c=tName==="inc"?"in":"out";
+  const freqName = k => {
+    if(k==='m') return t('freqMonthly');
+    if(k==='q') return t('freqQuarterly');
+    return t('freqYearly');
+  };
+  return`<div class="sec"><b>${title} <span class="${c}">${eur(sum(l))}</span></b><button class="s" data-a="eAdd" data-p="${p.id}" data-t="${tName}">${t('add')}</button></div>`+
+  (l.length?`<table>${l.map(x=>`<tr><td>${esc(x.name)}<div class="tag">${esc(x.cat)} · ${freqName(x.freq)}</div></td>
   <td class="a ${c}">${eur(x.amount)}${x.freq!=="m"?`<div class="tag">${eur(mo(x))}/Mon.</div>`:""}</td>
-  <td class="a"><button class="s k" data-a="eMenu" data-p="${p.id}" data-t="${t}" data-i="${x.id}" aria-label="Menü">⋯</button></td></tr>`).join("")}</table>`:`<div class="empty">Noch keine Einträge.</div>`);
+  <td class="a"><button class="s k" data-a="eMenu" data-p="${p.id}" data-t="${tName}" data-i="${x.id}" aria-label="Menü">⋯</button></td></tr>`).join("")}</table>`:`<div class="empty">${t('noEntries')}</div>`);
 }
 function ask(html,ok){
-  dlg.innerHTML=html+`<div class="row"><button id="cx">Abbrechen</button><button id="ok" class="p">Speichern</button></div>`;
+  dlg.innerHTML=html+`<div class="row"><button id="cx">${t('cancel')}</button><button id="ok" class="p">${t('save')}</button></div>`;
   dlg.showModal();
   document.getElementById("cx").onclick=()=>dlg.close();
   document.getElementById("ok").onclick=()=>{if(ok()!==false){dlg.close();save();render()}};
   const f=dlg.querySelector("input");if(f)f.focus();
 }
 function nameDlg(title,val,cb){
-  ask(`<h2>${title}</h2><label>Name</label><input id="nm" value="${esc(val)}">`,()=>{const v=document.getElementById("nm").value.trim();if(!v)return false;cb(v)});
+  ask(`<h2>${title}</h2><label>${t('renameTitle')}</label><input id="nm" value="${esc(val)}">`,()=>{const v=document.getElementById("nm").value.trim();if(!v)return false;cb(v)});
 }
-function entryDlg(p,t,x){
-  const cats=t==="inc"?ICATS:CATS,isNew=!x;x=x||{name:"",cat:cats[0],amount:"",freq:"m"};
-  ask(`<h2>${t==="inc"?"Einnahme":"Ausgabe"} ${isNew?"hinzufügen":"bearbeiten"} (${esc(p.name)})</h2>
-  <label>Bezeichnung</label><input id="n" value="${esc(x.name)}">
-  <label>Betrag (€)</label><input id="a" type="number" step="0.01" min="0" value="${x.amount}">
-  <label>Kategorie</label><select id="c">${cats.map(c=>`<option${c===x.cat?" selected":""}>${c}</option>`).join("")}</select>
-  <label>Rhythmus</label><select id="f">${Object.entries(FREQ).map(([k,v])=>`<option value="${k}"${k===x.freq?" selected":""}>${v[0]}</option>`).join("")}</select>`,()=>{
+function entryDlg(p,tName,x){
+  const cats=tName==="inc"?ICATS:CATS,isNew=!x;x=x||{name:"",cat:cats[0],amount:"",freq:"m"};
+  const freqName = k => {
+    if(k==='m') return t('freqMonthly');
+    if(k==='q') return t('freqQuarterly');
+    return t('freqYearly');
+  };
+  ask(`<h2>${tName==="inc"?t('addIncome'):t('addExpense')} ${isNew?"":""} (${esc(p.name)})</h2>
+  <label>${t('nameLabel')}</label><input id="n" value="${esc(x.name)}">
+  <label>${t('amountLabel')}</label><input id="a" type="number" step="0.01" min="0" value="${x.amount}">
+  <label>${t('catLabel')}</label><select id="c">${cats.map(c=>`<option${c===x.cat?" selected":""}>${c}</option>`).join("")}</select>
+  <label>${t('freqLabel')}</label><select id="f">${Object.keys(FREQ).map(k=>`<option value="${k}"${k===x.freq?" selected":""}>${freqName(k)}</option>`).join("")}</select>`,()=>{
     const n=document.getElementById("n").value.trim(),a=parseFloat(document.getElementById("a").value);
     if(!n||isNaN(a)||a<0)return false;
     const d={name:n,amount:a,cat:document.getElementById("c").value,freq:document.getElementById("f").value};
-    if(isNew)p[t].push({id:uid(),...d});else Object.assign(x,d);
+    if(isNew)p[tName].push({id:uid(),...d});else Object.assign(x,d);
   });
 }
-document.getElementById("hh").onchange=ev=>{S.cur=ev.target.value;save();render()};
-document.getElementById("hAdd").onclick=()=>nameDlg("Neuer Haushalt","",v=>{const h={id:uid(),name:v,persons:[]};S.hh.push(h);S.cur=h.id});
-function snapshot(){return JSON.stringify({app:"myfinances",version:1,exported:new Date().toISOString(),hh:S.hh},null,1)}
+
+document.getElementById("hhPanel").onclick=ev=>{
+  const b=ev.target.closest("button[data-id]");
+  if(!b)return;
+  S.cur=b.dataset.id;
+  document.getElementById("hhDropdown").removeAttribute("open");
+  save();
+  render();
+};
+
+document.getElementById("hAdd").onclick=()=>{
+  document.querySelectorAll(".menu-dropdown").forEach(d=>d.removeAttribute("open"));
+  nameDlg(t('newHH'),"",v=>{const h={id:uid(),name:v,persons:[]};S.hh.push(h);S.cur=h.id});
+};
+
+function snapshot(){return JSON.stringify({app:"myfinances",version:1,exported:new Date().toISOString(),hh:S.hh},null,2)}
 function importData(txt){
   const o=JSON.parse(txt),a=Array.isArray(o)?o:o.hh;
   if(!Array.isArray(a)||!a.length)throw 0;
@@ -136,43 +424,297 @@ function importData(txt){
   if(S.hh.length===1&&!S.hh[0].persons.length)S.hh=nh;else S.hh.push(...nh);
   S.cur=nh[0].id;
 }
+
 function dataDlg(){
-  dlg.innerHTML=`<h2>Export / Import</h2>
-  <label>Export (Sicherung aller Haushalte)</label>
-  <div class="row" style="margin:0 0 6px;justify-content:flex-start"><button id="ex" class="p">Als Datei speichern</button><button id="cp">Text kopieren</button></div>
+  document.querySelectorAll(".menu-dropdown").forEach(d=>d.removeAttribute("open"));
+  dlg.innerHTML=`<h2>${t('exportImport')}</h2>
+  <label>${t('exportLabel')}</label>
+  <div class="row" style="margin:0 0 10px;justify-content:flex-start;gap:8px;">
+    <button id="ex" class="p">${t('downloadFileBtn')}</button>
+    <button id="cp">${t('copyTextBtn')}</button>
+  </div>
   <textarea id="et" readonly></textarea>
-  <label>Import</label><input type="file" id="fi" accept=".json,application/json">
-  <textarea id="it" placeholder="…oder gesicherten Text hier einfügen" style="margin-top:8px"></textarea>
-  <div id="ms" class="tag" style="margin-top:8px"></div>
-  <div class="row"><button id="cx">Schließen</button><button id="ok" class="p">Importieren</button></div>`;
+  <label style="margin-top:16px;">${t('importLabel')}</label>
+  <div style="margin-bottom:8px;">
+    <label for="fi" class="file-upload-btn">${t('selectFileBtn')}</label>
+    <input type="file" id="fi" accept=".json,application/json" style="display:none">
+  </div>
+  <textarea id="it" placeholder="${t('importPlaceholder')}" style="margin-top:8px"></textarea>
+  <div id="ms" class="tag" style="margin-top:8px;font-weight:600;color:var(--ac);"></div>
+  <div class="row"><button id="cx">${t('close')}</button><button id="ok" class="p">${t('importBtn')}</button></div>`;
   dlg.showModal();
-  const $=id=>document.getElementById(id),ms=t=>$("ms").textContent=t;
+  const $=id=>document.getElementById(id),ms=msgText=>$("ms").textContent=msgText;
   $("et").value=snapshot();
   $("cx").onclick=()=>dlg.close();
-  $("ex").onclick=async()=>{
-    try{const d=window.claude&&await claude.use("downloads");
-      if(d){await d.save({filename:"myfinances-"+new Date().toISOString().slice(0,10)+".json",data:$("et").value});ms("Datei gespeichert.");return}
-    }catch(x){if(x&&x.code==="declined"){ms("Abgebrochen.");return}}
-    ms("Direktes Speichern ist hier nicht möglich – bitte den Text kopieren und selbst ablegen.");
+  
+  $("ex").onclick=()=>{
+    try {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent($("et").value);
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `myfinances-${new Date().toISOString().slice(0,10)}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      ms(settings.lang==='tr' ? "Dışa aktarma dosyası başarıyla indirildi!" : settings.lang==='en' ? "Export file downloaded successfully!" : "Export-Datei wurde erfolgreich heruntergeladen!");
+    } catch(x) {
+      ms("Error.");
+    }
   };
+  
   $("cp").onclick=async()=>{
-    const t=$("et").value;
-    try{await navigator.clipboard.writeText(t);ms("In die Zwischenablage kopiert.");return}catch(x){}
+    const txt=$("et").value;
+    try{await navigator.clipboard.writeText(txt);ms("Copied.");return}catch(x){}
     $("et").select();let k=false;try{k=document.execCommand("copy")}catch(x){}
-    ms(k?"Kopiert.":"Bitte den markierten Text manuell kopieren.");
+    ms(k?"Copied!":"Manual copy required.");
   };
   $("fi").onchange=async ev=>{const f=ev.target.files[0];if(!f)return;
-    try{$("it").value=await f.text();ms("Datei geladen – jetzt auf „Importieren“ klicken.")}catch(x){ms("Datei konnte nicht gelesen werden.")}};
+    try{$("it").value=await f.text();ms(settings.lang==='tr' ? "Dosya yüklendi – şimdi 'İçe Aktar' butonuna tıklayın." : settings.lang==='en' ? "File loaded – now click 'Import'." : "Datei geladen – jetzt auf „Importieren“ klicken.")}catch(x){ms("Error reading file.")}};
   $("ok").onclick=()=>{
-    try{importData($("it").value);save();render();dlg.close()}catch(x){ms("Import fehlgeschlagen: Die Daten sind ungültig.")}
+    try{
+      const txt = $("it").value.trim();
+      if(!txt) { ms(settings.lang==='tr' ? "Lütfen bir dosya seçin veya metin girin." : settings.lang==='en' ? "Please select a file or insert text." : "Bitte wählen Sie eine Datei aus oder fügen Sie Text ein."); return; }
+      importData(txt);save();render();dlg.close();
+    }catch(x){ms("Failed.")}
   };
 }
 document.getElementById("hData").onclick=dataDlg;
+
+function openSettingsDlg() {
+  document.querySelectorAll(".menu-dropdown").forEach(d=>d.removeAttribute("open"));
+  renderSettingsMain();
+}
+
+function renderSettingsMain() {
+  dlg.innerHTML = `
+    <h2>${t('settingsTitle')}</h2>
+    <div class="settings-section">
+      <div class="settings-title">${t('appearance')}</div>
+      <label>${t('designMode')}</label>
+      <select id="themeSelect">
+        <option value="system" ${settings.theme==='system'?'selected':''}>${t('systemTheme')}</option>
+        <option value="light" ${settings.theme==='light'?'selected':''}>${t('lightTheme')}</option>
+        <option value="dark" ${settings.theme==='dark'?'selected':''}>${t('darkTheme')}</option>
+      </select>
+    </div>
+    <div class="settings-section">
+      <div class="settings-title">${t('language')}</div>
+      <label>${t('selectLang')}</label>
+      <select id="langSelect">
+        <option value="de" ${settings.lang==='de'?'selected':''}>🇩🇪 Deutsch</option>
+        <option value="en" ${settings.lang==='en'?'selected':''}>🇬🇧 English</option>
+        <option value="tr" ${settings.lang==='tr'?'selected':''}>🇹🇷 Türkçe</option>
+      </select>
+    </div>
+    <div class="settings-section">
+      <div class="settings-title">${t('legal')}</div>
+      <div class="legal-card" id="btnImpressum">
+        <span><strong>${t('impressumTitle')}</strong><br><small style="color:var(--mu);">${t('impressumSub')}</small></span>
+        <span>➔</span>
+      </div>
+      <div class="legal-card" id="btnDatenschutz">
+        <span><strong>${t('dataPrivacy')}</strong><br><small style="color:var(--mu);">${t('dataPrivacySub')}</small></span>
+        <span>➔</span>
+      </div>
+    </div>
+    <div class="row">
+      <button id="cx">${t('ready')}</button>
+    </div>
+  `;
+  dlg.showModal();
+
+  document.getElementById("themeSelect").onchange = (e) => applyTheme(e.target.value);
+  document.getElementById("langSelect").onchange = (e) => {
+    settings.lang = e.target.value;
+    try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch(ex){}
+    renderSettingsMain();
+    render();
+  };
+  document.getElementById("btnImpressum").onclick = () => renderLegalPage("Impressum");
+  document.getElementById("btnDatenschutz").onclick = () => renderLegalPage("Datenschutz");
+  document.getElementById("cx").onclick = () => dlg.close();
+}
+
+function renderLegalPage(type) {
+  let content = "";
+  if(type === "Impressum") {
+    content = `
+      <h3>${t('impressumTitle')}</h3>
+
+      <h4>Angaben gemäß § 5 DDG</h4>
+      <p>
+        <strong>Ufuk Tezerdi</strong><br>
+        [Straße und Hausnummer]<br>
+        [PLZ und Ort]<br>
+        Deutschland
+      </p>
+
+      <h4>Kontakt</h4>
+      <p>
+        E-Mail: u.tezerdi@gmail.com
+      </p>
+
+      <h4>Haftung für Inhalte</h4>
+      <p>
+        Die Inhalte dieser App wurden mit größtmöglicher Sorgfalt erstellt.
+        Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte
+        kann jedoch keine Gewähr übernommen werden.
+      </p>
+
+      <h4>Haftung für Links</h4>
+      <p>
+        Diese App kann Links zu externen Websites Dritter enthalten.
+        Auf deren Inhalte haben wir keinen Einfluss. Für die Inhalte
+        der verlinkten Seiten ist stets der jeweilige Anbieter oder
+        Betreiber verantwortlich.
+      </p>
+
+      <h4>Urheberrecht</h4>
+      <p>
+        Die durch den Betreiber erstellten Inhalte und Werke dieser App
+        unterliegen dem deutschen Urheberrecht. Eine Vervielfältigung,
+        Bearbeitung oder Verbreitung außerhalb der Grenzen des
+        Urheberrechts bedarf der vorherigen Zustimmung des jeweiligen
+        Rechteinhabers.
+      </p>
+    `;
+  } else {
+    content = `
+      <h3>${t('dataPrivacy')}</h3>
+
+      <p><strong>Datenschutzerklärung – myFinances</strong></p>
+      <p><em>Stand: November 2026</em></p>
+
+      <h4>1. Allgemeine Hinweise</h4>
+      <p>
+        Der Schutz deiner persönlichen Daten ist uns wichtig. Die App myFinances
+        wurde so entwickelt, dass deine eingegebenen Finanz- und Haushaltsdaten
+        grundsätzlich lokal auf deinem Gerät beziehungsweise in deinem Browser
+        gespeichert werden.
+      </p>
+      <p>
+        Über die App selbst werden keine Finanzdaten an eine zentrale Datenbank,
+        einen Cloud-Dienst oder einen Server des Betreibers übertragen.
+      </p>
+
+      <h4>2. Welche Daten werden gespeichert?</h4>
+      <p>
+        Bei der Nutzung von myFinances können folgende Informationen eingegeben
+        und lokal gespeichert werden:
+      </p>
+      <ul>
+        <li>Haushalte und Personen</li>
+        <li>Einnahmen und Ausgaben</li>
+        <li>Beträge, Kategorien und Buchungsinformationen</li>
+        <li>Einstellungen wie Sprache und Design</li>
+      </ul>
+
+      <h4>3. Lokale Datenspeicherung</h4>
+      <p>
+        Die Speicherung erfolgt über die LocalStorage-Funktion deines Browsers.
+        Die Daten verbleiben auf dem verwendeten Gerät und sind grundsätzlich
+        nur über den jeweiligen Browser zugänglich.
+      </p>
+      <p>
+        Es findet keine automatische Synchronisierung zwischen verschiedenen
+        Geräten oder Browsern statt.
+      </p>
+
+      <h4>4. Keine Benutzerkonten und keine Cloud-Datenbank</h4>
+      <p>
+        myFinances benötigt keine Registrierung und kein Benutzerkonto.
+        Die App verwendet keine zentrale Datenbank zur Speicherung deiner
+        Finanzdaten.
+      </p>
+
+      <h4>5. Weitergabe von Daten</h4>
+      <p>
+        Die über myFinances eingegebenen Finanzdaten werden durch die App
+        nicht an Dritte weitergegeben. Es werden innerhalb der App keine
+        Analyse- oder Tracking-Dienste und keine Werbedienste eingesetzt.
+      </p>
+
+      <h4>6. Datensicherung und Datenverlust</h4>
+      <p>
+        Da deine Daten lokal im Browser gespeichert werden, bist du selbst
+        für deren Sicherung verantwortlich. Du kannst die Exportfunktion
+        der App nutzen, um deine Daten als JSON-Datei zu sichern und später
+        wieder zu importieren.
+      </p>
+      <p>
+        Werden die Browserdaten gelöscht, der Browser deinstalliert oder
+        die lokale Speicherung anderweitig entfernt, können deine Daten
+        unwiederbringlich verloren gehen.
+      </p>
+
+      <h4>7. Löschung deiner Daten</h4>
+      <p>
+        Du kannst deine gespeicherten Daten direkt innerhalb der App oder
+        durch Löschen der entsprechenden Browserdaten entfernen.
+        Eine separate Anfrage an den Betreiber ist für die Löschung
+        lokal gespeicherter Finanzdaten nicht erforderlich.
+      </p>
+
+      <h4>8. Hosting und technische Zugriffsdaten</h4>
+      <p>
+        Beim Aufruf der App über eine Website kann der Hosting-Anbieter
+        technisch erforderliche Informationen verarbeiten, beispielsweise
+        IP-Adressen, Zeitpunkt des Zugriffs und angeforderte Dateien.
+        Diese Verarbeitung erfolgt durch den jeweiligen Hosting-Anbieter
+        und liegt außerhalb der lokalen Datenspeicherung der App.
+      </p>
+
+      <h4>9. Deine Rechte</h4>
+      <p>
+        Im Rahmen der geltenden Datenschutzgesetze, insbesondere der
+        Datenschutz-Grundverordnung (DSGVO), hast du unter anderem das
+        Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der
+        Verarbeitung und Datenübertragbarkeit sowie das Recht auf
+        Beschwerde bei einer Datenschutzaufsichtsbehörde.
+      </p>
+
+      <h4>10. Änderungen dieser Datenschutzerklärung</h4>
+      <p>
+        Diese Datenschutzerklärung kann angepasst werden, wenn sich
+        Funktionen der App oder die rechtlichen Anforderungen ändern.
+      </p>
+
+      <h4>11. Kontakt</h4>
+      <p>
+        Verantwortlich für die Datenverarbeitung im Zusammenhang mit
+        dieser App ist:
+      </p>
+      <p>
+        <strong>Ufuk Tezerdi</strong><br>
+        [Anschrift]<br>
+        E-Mail: u.tezerdi@gmail.com
+      </p>
+    `;
+  }
+
+  dlg.innerHTML = `
+    <h2>${t('legal')}</h2>
+    <div class="legal-content">
+      ${content}
+    </div>
+    <div class="row">
+      <button id="btnBack">${t('backToSettings')}</button>
+      <button id="cx">${t('close')}</button>
+    </div>
+  `;
+
+  document.getElementById("btnBack").onclick = () => renderSettingsMain();
+  document.getElementById("cx").onclick = () => dlg.close();
+}
+
+document.getElementById("hSettings").onclick = openSettingsDlg;
+
 document.addEventListener("click",ev=>{
-  const dropdown=document.querySelector(".menu-dropdown");
-  if(!dropdown)return;
-  if(!dropdown.contains(ev.target) || !ev.target.closest("summary")) dropdown.removeAttribute("open");
+  document.querySelectorAll(".menu-dropdown").forEach(dropdown=>{
+    if(!dropdown.contains(ev.target)) dropdown.removeAttribute("open");
+  });
 });
+
 function closeMenu(){document.getElementById("menu").hidden=true}
 document.addEventListener("click",closeMenu,true);
 function openMenu(btn,items){
@@ -184,35 +726,35 @@ function openMenu(btn,items){
   m.style.left=Math.max(8,Math.min(r.right-m.offsetWidth,innerWidth-m.offsetWidth-8))+"px";
 }
 function confirmDlg(title,msg,label,fn){
-  dlg.innerHTML=`<h2>${title}</h2><p>${msg}</p><div class="row">${label?'<button id="cx">Abbrechen</button>':''}<button id="ok" class="p ${label?'x':''}">${label||'OK'}</button></div>`;
+  dlg.innerHTML=`<h2>${title}</h2><p>${msg}</p><div class="row">${label?`<button id="cx">${t('cancel')}</button>`:''}<button id="ok" class="p ${label?'x':''}">${label||'OK'}</button></div>`;
   dlg.showModal();
   if(label)document.getElementById("cx").onclick=()=>dlg.close();
   document.getElementById("ok").onclick=()=>{dlg.close();if(fn){fn();save();render()}};
 }
-document.getElementById("hMenu").onclick=ev=>{ev.currentTarget.closest("details")?.removeAttribute("open");openMenu(ev.currentTarget,[
-  ["Umbenennen",()=>nameDlg("Haushalt umbenennen",H().name,v=>H().name=v)],
-  ["Löschen",()=>{
-    if(S.hh.length<2)return confirmDlg("Nicht möglich","Der letzte Haushalt kann nicht gelöscht werden.");
-    confirmDlg("Haushalt löschen?",`„${esc(H().name)}“ wird mit allen Personen und Einträgen gelöscht.`,"Löschen",()=>{S.hh=S.hh.filter(h=>h.id!==S.cur);S.cur=S.hh[0].id});
-  },"d"]]);};
+document.getElementById("hMenu").onclick=ev=>{
+  document.querySelectorAll(".menu-dropdown").forEach(d=>d.removeAttribute("open"));
+  openMenu(ev.currentTarget,[
+    [t('rename'),()=>nameDlg(t('renameHH'),H().name,v=>H().name=v)],
+    [t('delete'),()=>{
+      if(S.hh.length<2)return confirmDlg("Nicht möglich","Der letzte Haushalt kann nicht gelöscht werden.");
+      confirmDlg(t('deleteHHConfirmTitle'),`„${esc(H().name)}“`,t('delete'),()=>{S.hh=S.hh.filter(h=>h.id!==S.cur);S.cur=S.hh[0].id});
+    },"d"]
+  ]);
+};
+
 document.getElementById("app").onclick=ev=>{
   const b=ev.target.closest("button[data-a]");if(!b)return;
-  const h=H(),p=h.persons.find(q=>q.id===b.dataset.p),t=b.dataset.t,a=b.dataset.a;
-  if(a==="pAdd")nameDlg("Neue Person","",v=>h.persons.push({id:uid(),name:v,inc:[],exp:[]}));
+  const h=H(),p=h.persons.find(q=>q.id===b.dataset.p),tName=b.dataset.t,a=b.dataset.a;
+  if(a==="pAdd")nameDlg(t('addPerson'),"",v=>h.persons.persons?.push ? h.persons.push({id:uid(),name:v,inc:[],exp:[]}) : h.persons.push({id:uid(),name:v,inc:[],exp:[]}));
   else if(a==="pMenu")openMenu(b,[
-    ["Umbenennen",()=>nameDlg("Person umbenennen",p.name,v=>p.name=v)],
-    ["Löschen",()=>confirmDlg("Person löschen?",`„${esc(p.name)}“ wird mit allen Einnahmen und Ausgaben gelöscht.`,"Löschen",()=>{h.persons=h.persons.filter(q=>q!==p)}),"d"]]);
-  else if(a==="eAdd")entryDlg(p,t);
-  else if(a==="eMenu"){const x=p[t].find(y=>y.id===b.dataset.i);openMenu(b,[
-    ["Bearbeiten",()=>entryDlg(p,t,x)],
-    ["Löschen",()=>{p[t]=p[t].filter(y=>y!==x);save();render()},"d"]])}
+    [t('rename'),()=>nameDlg(t('renamePerson'),p.name,v=>p.name=v)],
+    [t('delete'),()=>confirmDlg(t('deletePersonConfirmTitle'),`„${esc(p.name)}“`,t('delete'),()=>{h.persons=h.persons.filter(q=>q!==p)}),"d"]]);
+  else if(a==="eAdd")entryDlg(p,tName);
+  else if(a==="eMenu"){const x=p[tName].find(y=>y.id===b.dataset.i);openMenu(b,[
+    [t('rename'),()=>entryDlg(p,tName,x)],
+    [t('delete'),()=>{p[tName]=p[tName].filter(y=>y!==x);save();render()},"d"]])}
 };
 render();
-</script>
-<script>
-if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(err => console.warn('Service Worker konnte nicht registriert werden:', err)));
-}
 </script>
 </body>
 </html>
