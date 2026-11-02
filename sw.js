@@ -1,4 +1,4 @@
-const CACHE_NAME = 'myfinances-pwa-v4';
+const CACHE_NAME = 'myfinances-pwa-v5';
 const APP_FILES = [
   './',
   './index.html',
@@ -14,7 +14,7 @@ const APP_FILES = [
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE_NAME)
-      .then(c => c.addAll(APP_FILES))
+      .then(c => Promise.all(APP_FILES.map(f => c.add(f).catch(() => null))))
       .then(() => self.skipWaiting())
   );
 });
