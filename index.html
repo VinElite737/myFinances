@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  FlightDeck – Pilot Toolkit
+  myFinances
   Copyright © 2026 Ufuk Tezerdi. All rights reserved.
 
   This software, including its source code, design and content, is the
@@ -94,6 +94,8 @@ button{background:var(--card);border:1px solid var(--bd);border-radius:10px;padd
 .lmeta{font-size:12px;color:var(--mu);margin-top:8px}.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.chips label{margin:0;display:flex;align-items:center;justify-content:center;gap:4px;padding:7px 2px;border:1px solid var(--bd);border-radius:8px;font-size:12px;font-weight:600;color:var(--tx);cursor:pointer}.chips input{width:auto;padding:0;margin:0}.chips label:has(input:checked){border-color:var(--ac);background:var(--bg);color:var(--ac)}
 dialog{max-height:92vh;overflow-y:auto}.plan-wrap{max-height:42vh;overflow:auto;margin-top:12px;border:1px solid var(--bd);border-radius:10px}.plan-wrap table{font-size:12px;min-width:430px}.plan-wrap th{position:sticky;top:0;background:var(--card);z-index:1;padding:8px 6px}.plan-wrap td{padding:6px}.plan-wrap tr.paid td{opacity:.5}.plan-wrap tr.spr td{background:var(--inb)}.spbox{background:var(--bg);border-radius:12px;padding:4px 12px 12px;margin-top:12px}.spbox .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}.two2{display:grid;grid-template-columns:1.4fr 1fr;gap:8px}.spres{margin-top:10px;font-size:13px;font-weight:600}
 @media(max-width:640px){.lgrid{grid-template-columns:1fr}}
+.pill{display:inline-block;margin-left:6px;padding:1px 9px;border-radius:99px;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:var(--bg);border:1px solid var(--bd);color:var(--mu);cursor:pointer;vertical-align:1px}.pill.on{color:var(--ac);border-color:var(--ac)}
+.meta2{margin-top:12px;display:grid;gap:2px}.trow{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--bd)}.trow>div{flex:1;min-width:0;overflow-wrap:anywhere}.trow:first-of-type{border-top:0}
 </style>
 </head>
 <body>
@@ -343,9 +345,21 @@ const I18N = {
   }
 };
 
-Object.assign(I18N.de,{menuEdit:"Bearbeiten",noteLabel:"Notizen",notePh:"Notizen …",menuPlan:"Tilgungsplan",planTitle:"Tilgungsplan",colDate:"Datum",colRate:"Rate",colInt:"Zinsen",colPrin:"Tilgung",colBal:"Restschuld",colSp:"Sondertilgung",spTitle:"Sondertilgung simulieren",spAmount:"Betrag (€)",spMode:"Rhythmus",spOnce:"einmalig",spYear:"jährlich",spMonth:"monatlich",spFrom:"Ab",spSaved:"Zinsersparnis",spShort:"Laufzeit kürzer um",spEnd:"Neues Ende",spNone:"Betrag eingeben, um die Zinsersparnis zu sehen.",spMonths:"Monate",holNote:"In Pausenmonaten werden die Zinsen auf die Restschuld aufgeschlagen (Tilgung negativ).",loanAllIn:"Gesamtkosten inkl.",loanRateAll:"Rate inkl. Kosten",loansHeader:"Kreditüberblick",addLoan:"+ Kredit",noLoans:"Noch keine Kredite.",loanNew:"Kredit hinzufügen",loanEdit:"Kredit bearbeiten",loanName:"Bezeichnung",loanNet:"Nettodarlehensumme (€)",loanBound:"Gebundener Sollzins (% p.a.)",loanEff:"Effektiver Jahreszins (% p.a.)",loanHol:"Payment Holiday (Monate ohne Zahlung)",loanHolNone:"Keine ausgewählt = keine Zahlungspause",loanTerm:"Laufzeit (Monate)",loanStart:"Beginn (erste Rate)",loanInterest:"Zinsbetrag",loanRate:"Darlehensrate mtl.",loanTotal:"Gesamtbetrag",loanProgress:"Monate abgezahlt",loanLeft:"Restschuld ca.",loanHolShort:"Pause",loanBoundShort:"Sollzins",loanEffShort:"Eff.",loanDelTitle:"Kredit löschen?"});
-Object.assign(I18N.en,{menuEdit:"Edit",noteLabel:"Notes",notePh:"Notes …",menuPlan:"Repayment plan",planTitle:"Repayment plan",colDate:"Date",colRate:"Payment",colInt:"Interest",colPrin:"Principal",colBal:"Balance",colSp:"Extra repayment",spTitle:"Simulate extra repayment",spAmount:"Amount (€)",spMode:"Frequency",spOnce:"once",spYear:"yearly",spMonth:"monthly",spFrom:"From",spSaved:"Interest saved",spShort:"Term shorter by",spEnd:"New end",spNone:"Enter an amount to see the interest savings.",spMonths:"months",holNote:"In holiday months interest is added to the balance (negative principal).",loanAllIn:"Total cost incl.",loanRateAll:"Payment incl. costs",loansHeader:"Loan Overview",addLoan:"+ Loan",noLoans:"No loans yet.",loanNew:"Add loan",loanEdit:"Edit loan",loanName:"Name",loanNet:"Net loan amount (€)",loanBound:"Fixed nominal rate (% p.a.)",loanEff:"Effective rate (% p.a.)",loanHol:"Payment holiday (months without payment)",loanHolNone:"None selected = no payment holiday",loanTerm:"Term (months)",loanStart:"Start (first instalment)",loanInterest:"Interest amount",loanRate:"Monthly instalment",loanTotal:"Total amount",loanProgress:"months paid",loanLeft:"Remaining debt approx.",loanHolShort:"Holiday",loanBoundShort:"Nominal",loanEffShort:"Eff.",loanDelTitle:"Delete loan?"});
-Object.assign(I18N.tr,{menuEdit:"Düzenle",noteLabel:"Notlar",notePh:"Notlar …",menuPlan:"Ödeme planı",planTitle:"Ödeme planı",colDate:"Tarih",colRate:"Taksit",colInt:"Faiz",colPrin:"Anapara",colBal:"Kalan borç",colSp:"Ek ödeme",spTitle:"Ek ödeme simülasyonu",spAmount:"Tutar (€)",spMode:"Sıklık",spOnce:"tek sefer",spYear:"yıllık",spMonth:"aylık",spFrom:"Başlangıç",spSaved:"Faiz tasarrufu",spShort:"Vade kısalır",spEnd:"Yeni bitiş",spNone:"Faiz tasarrufunu görmek için tutar girin.",spMonths:"ay",holNote:"Tatil aylarında faiz kalan borca eklenir (negatif anapara).",loanAllIn:"Toplam maliyet dahil",loanRateAll:"Masraflar dahil taksit",loansHeader:"Kredi Özeti",addLoan:"+ Kredi",noLoans:"Henüz kredi yok.",loanNew:"Kredi ekle",loanEdit:"Krediyi düzenle",loanName:"Ad",loanNet:"Net kredi tutarı (€)",loanBound:"Sabit nominal faiz (% yıllık)",loanEff:"Efektif faiz (% yıllık)",loanHol:"Ödeme tatili (ödeme yapılmayan aylar)",loanHolNone:"Seçim yok = ödeme tatili yok",loanTerm:"Vade (ay)",loanStart:"Başlangıç (ilk taksit)",loanInterest:"Faiz tutarı",loanRate:"Aylık taksit",loanTotal:"Toplam tutar",loanProgress:"ay ödendi",loanLeft:"Kalan borç yakl.",loanHolShort:"Tatil",loanBoundShort:"Nominal",loanEffShort:"Efektif",loanDelTitle:"Kredi silinsin mi?"});
+Object.assign(I18N.de,{menuEdit:"Bearbeiten",noteLabel:"Notizen",notePh:"Notizen …",menuPlan:"Tilgungsplan",planTitle:"Tilgungsplan",colDate:"Datum",colRate:"Rate",colInt:"Zinsen",colPrin:"Tilgung",colBal:"Restschuld",colSp:"Sondertilgung",spTitle:"Sondertilgung simulieren",spAmount:"Betrag (€)",spMode:"Rhythmus",spOnce:"einmalig",spYear:"jährlich",spMonth:"monatlich",spFrom:"Ab",spSaved:"Zinsersparnis",spShort:"Laufzeit kürzer um",spEnd:"Neues Ende",spNone:"Betrag eingeben, um die Zinsersparnis zu sehen.",spMonths:"Monate",holNote:"In Pausenmonaten werden die Zinsen auf die Restschuld aufgeschlagen (Tilgung negativ).",loanAllIn:"Gesamtkosten inkl.",loanRateAll:"Rate inkl. Kosten",loansHeader:"Kreditüberblick",addLoan:"+ Kredit",noLoans:"Noch keine Kredite.",loanNew:"Kredit hinzufügen",loanEdit:"Kredit bearbeiten",loanName:"Bezeichnung",loanNet:"Nettodarlehensumme (€)",loanContractRate:"Vereinbarte Monatsrate (€; optional)",loanBound:"Gebundener Sollzins (% p.a.)",loanEff:"Effektiver Jahreszins (% p.a.)",loanHol:"Payment Holiday (Monate ohne Zahlung)",loanHolNone:"Keine ausgewählt = keine Zahlungspause",loanTerm:"Laufzeit (Monate)",loanStart:"Beginn (erste Rate)",loanInterest:"Zinsbetrag",loanRate:"Darlehensrate mtl.",loanTotal:"Gesamtbetrag",loanProgress:"Monate abgezahlt",loanLeft:"Restschuld ca.",loanHolShort:"Pause",loanBoundShort:"Sollzins",loanEffShort:"Eff.",loanDelTitle:"Kredit löschen?"});
+Object.assign(I18N.en,{menuEdit:"Edit",noteLabel:"Notes",notePh:"Notes …",menuPlan:"Repayment plan",planTitle:"Repayment plan",colDate:"Date",colRate:"Payment",colInt:"Interest",colPrin:"Principal",colBal:"Balance",colSp:"Extra repayment",spTitle:"Simulate extra repayment",spAmount:"Amount (€)",spMode:"Frequency",spOnce:"once",spYear:"yearly",spMonth:"monthly",spFrom:"From",spSaved:"Interest saved",spShort:"Term shorter by",spEnd:"New end",spNone:"Enter an amount to see the interest savings.",spMonths:"months",holNote:"In holiday months interest is added to the balance (negative principal).",loanAllIn:"Total cost incl.",loanRateAll:"Payment incl. costs",loansHeader:"Loan Overview",addLoan:"+ Loan",noLoans:"No loans yet.",loanNew:"Add loan",loanEdit:"Edit loan",loanName:"Name",loanNet:"Net loan amount (€)",loanContractRate:"Contractual monthly payment (€; optional)",loanBound:"Fixed nominal rate (% p.a.)",loanEff:"Effective rate (% p.a.)",loanHol:"Payment holiday (months without payment)",loanHolNone:"None selected = no payment holiday",loanTerm:"Term (months)",loanStart:"Start (first instalment)",loanInterest:"Interest amount",loanRate:"Monthly instalment",loanTotal:"Total amount",loanProgress:"months paid",loanLeft:"Remaining debt approx.",loanHolShort:"Holiday",loanBoundShort:"Nominal",loanEffShort:"Eff.",loanDelTitle:"Delete loan?"});
+Object.assign(I18N.tr,{menuEdit:"Düzenle",noteLabel:"Notlar",notePh:"Notlar …",menuPlan:"Ödeme planı",planTitle:"Ödeme planı",colDate:"Tarih",colRate:"Taksit",colInt:"Faiz",colPrin:"Anapara",colBal:"Kalan borç",colSp:"Ek ödeme",spTitle:"Ek ödeme simülasyonu",spAmount:"Tutar (€)",spMode:"Sıklık",spOnce:"tek sefer",spYear:"yıllık",spMonth:"aylık",spFrom:"Başlangıç",spSaved:"Faiz tasarrufu",spShort:"Vade kısalır",spEnd:"Yeni bitiş",spNone:"Faiz tasarrufunu görmek için tutar girin.",spMonths:"ay",holNote:"Tatil aylarında faiz kalan borca eklenir (negatif anapara).",loanAllIn:"Toplam maliyet dahil",loanRateAll:"Masraflar dahil taksit",loansHeader:"Kredi Özeti",addLoan:"+ Kredi",noLoans:"Henüz kredi yok.",loanNew:"Kredi ekle",loanEdit:"Krediyi düzenle",loanName:"Ad",loanNet:"Net kredi tutarı (€)",loanContractRate:"Sözleşmedeki aylık taksit (€; isteğe bağlı)",loanBound:"Sabit nominal faiz (% yıllık)",loanEff:"Efektif faiz (% yıllık)",loanHol:"Ödeme tatili (ödeme yapılmayan aylar)",loanHolNone:"Seçim yok = ödeme tatili yok",loanTerm:"Vade (ay)",loanStart:"Başlangıç (ilk taksit)",loanInterest:"Faiz tutarı",loanRate:"Aylık taksit",loanTotal:"Toplam tutar",loanProgress:"ay ödendi",loanLeft:"Kalan borç yakl.",loanHolShort:"Tatil",loanBoundShort:"Nominal",loanEffShort:"Efektif",loanDelTitle:"Kredi silinsin mi?"});
+
+Object.assign(I18N.de,{loanPayout:"Auszahlungstag",loanGrace:"Karenzzeit",graceDays:"Tage",graceMonths:"Monate",loanStartDate:"Rückzahlungsbeginn (erste Rate)",graceInterest:"Karenzzinsen",graceInclNote:"davon Karenzzinsen",graceHint:"Zinsen vom Auszahlungstag bis zum Rückzahlungsbeginn (Sollzins, Tage: 365/Jahr). Sie werden zu Zinsbetrag und Gesamtbetrag addiert.",loanPayoutShort:"Auszahlung",loanGraceShort:"Karenz",graceDaysShort:"Tage",graceMonthsShort:"Mon."});
+Object.assign(I18N.en,{loanPayout:"Payout date",loanGrace:"Grace period",graceDays:"Days",graceMonths:"Months",loanStartDate:"Repayment start (first instalment)",graceInterest:"Grace interest",graceInclNote:"of which grace interest",graceHint:"Interest from payout date to repayment start (nominal rate, days: 365/year). Added to interest amount and total amount.",loanPayoutShort:"Payout",loanGraceShort:"Grace",graceDaysShort:"days",graceMonthsShort:"mo."});
+Object.assign(I18N.tr,{loanPayout:"Ödeme tarihi",loanGrace:"Ödemesiz dönem",graceDays:"Gün",graceMonths:"Ay",loanStartDate:"Geri ödeme başlangıcı (ilk taksit)",graceInterest:"Ödemesiz dönem faizi",graceInclNote:"bunun ödemesiz dönem faizi",graceHint:"Ödeme tarihinden geri ödeme başlangıcına kadar faiz (nominal faiz, gün: 365/yıl). Faiz tutarına ve toplam tutara eklenir.",loanPayoutShort:"Ödeme",loanGraceShort:"Ödemesiz",graceDaysShort:"gün",graceMonthsShort:"ay"});
+
+Object.assign(I18N.de,{loanProgress:"Raten bezahlt",loanPayCount:"Raten",loanTerm:"Laufzeit (Monate; mit Auszahlungstag ab Auszahlung)",graceHint:"Karenzzeit = Tage Auszahlung → 1. Rate (30/360). Die Karenzzinsen stecken in der 1. Rate, die Darlehensrate wird daraus berechnet. Raten fällig am 1. des Monats (Wochenende/Feiertag → nächster Bankarbeitstag)."});
+Object.assign(I18N.en,{loanProgress:"payments made",loanPayCount:"payments",loanTerm:"Term (months; with payout date: from payout)",graceHint:"Grace period = days payout → 1st instalment (30/360). Grace interest is part of the 1st instalment and the instalment is calculated from it. Due on the 1st of the month (weekend/holiday → next bank day)."});
+Object.assign(I18N.tr,{loanProgress:"taksit ödendi",loanPayCount:"taksit",loanTerm:"Vade (ay; ödeme tarihi varsa ödemeden itibaren)",graceHint:"Ödemesiz dönem = ödeme tarihi → 1. taksit arası gün (30/360). Faiz 1. taksitte yer alır, taksit buna göre hesaplanır. Ayın 1'inde vadeli (hafta sonu/tatil → sonraki iş günü)."});
+
+Object.assign(I18N.de,{graceAuto:"automatisch",graceManual:"manuell",trash:"Papierkorb",trashSub:"Gelöschte Einträge wiederherstellen",trashEmpty:"Der Papierkorb ist leer.",restore:"Wiederherstellen",trashClear:"Papierkorb leeren",trashClearMsg:"Alle Einträge im Papierkorb werden endgültig gelöscht.",delEntryTitle:"Eintrag löschen?",delEntryMsg:"Der Eintrag wird in den Papierkorb verschoben.",trashDel:"gelöscht am",trashNoTarget:"Wiederherstellen nicht möglich: Haushalt oder Person existiert nicht mehr.",kEntry:"Eintrag",kLoan:"Kredit"});
+Object.assign(I18N.en,{graceAuto:"automatic",graceManual:"manual",trash:"Trash",trashSub:"Restore deleted entries",trashEmpty:"Trash is empty.",restore:"Restore",trashClear:"Empty trash",trashClearMsg:"All items in the trash will be deleted permanently.",delEntryTitle:"Delete entry?",delEntryMsg:"The entry will be moved to the trash.",trashDel:"deleted on",trashNoTarget:"Cannot restore: household or person no longer exists.",kEntry:"Entry",kLoan:"Loan"});
+Object.assign(I18N.tr,{graceAuto:"otomatik",graceManual:"manuel",trash:"Çöp kutusu",trashSub:"Silinen kayıtları geri yükle",trashEmpty:"Çöp kutusu boş.",restore:"Geri yükle",trashClear:"Çöpü boşalt",trashClearMsg:"Çöp kutusundaki tüm kayıtlar kalıcı olarak silinecek.",delEntryTitle:"Kayıt silinsin mi?",delEntryMsg:"Kayıt çöp kutusuna taşınacak.",trashDel:"silinme tarihi",trashNoTarget:"Geri yüklenemedi: hane veya kişi artık yok.",kEntry:"Kayıt",kLoan:"Kredi"});
 
 let settings = { theme: 'system', lang: 'de' };
 try {
@@ -375,6 +389,11 @@ let S;
 try{S=JSON.parse(localStorage.getItem(KEY))}catch(x){}
 if(!S||!S.hh||!S.hh.length)S=blank();
 if(!S.cur||!S.hh.find(h=>h.id===S.cur))S.cur=S.hh[0].id;
+S.trash=S.trash||[];
+function trashAdd(o){S.trash.unshift({id:uid(),at:Date.now(),...o});S.trash=S.trash.slice(0,200)}
+function trashRestore(id){const e=S.trash.find(z=>z.id===id);if(!e)return false;const h=S.hh.find(x=>x.id===e.hh);if(!h)return false;
+  if(e.kind==="loan"){(h.loans=h.loans||[]).push(e.item)}else{const p=h.persons.find(q=>q.id===e.p);if(!p)return false;p[e.tn].push(e.item)}
+  S.trash=S.trash.filter(z=>z!==e);save();render();return true}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(x){}};
 const H=()=>S.hh.find(h=>h.id===S.cur);
 const mo=x=>x.amount/FREQ[x.freq][1];
@@ -434,65 +453,116 @@ function list(p,tName,title){
   <td class="a"><button class="s k" data-a="eMenu" data-p="${p.id}" data-t="${tName}" data-i="${x.id}" aria-label="Menü">⋯</button></td></tr>`).join("")}</table>`:`<div class="empty">${t('noEntries')}</div>`);
 }
 function monthName(m){return new Date(2000,m,1).toLocaleString(settings.lang==='tr'?'tr-TR':settings.lang==='en'?'en-GB':'de-DE',{month:'short'})}
-function loanCalc(l){
-  const A=l.amount,n=l.term,i=l.rate/100/12,hol=new Set(l.hol||[]);
-  const [sy,sm]=l.start.split("-").map(Number),m0=sm-1;
-  const pays=k=>!hol.has((m0+k)%12);
-  let cnt=0,sf=0;for(let k=0;k<n;k++)if(pays(k)){cnt++;sf+=Math.pow(1+i,n-1-k)}
+function isoD(d){return d.getUTCFullYear()+"-"+String(d.getUTCMonth()+1).padStart(2,"0")+"-"+String(d.getUTCDate()).padStart(2,"0")}
+function parseD(s){const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s||"");return m?{y:+m[1],m:+m[2],d:+m[3]}:null}
+function addDaysS(s,n){const p=parseD(s);if(!p)return"";return isoD(new Date(Date.UTC(p.y,p.m-1,p.d+n)))}
+function addMonthsS(s,n){const p=parseD(s);if(!p)return"";const last=new Date(Date.UTC(p.y,p.m-1+n+1,0)).getUTCDate();return isoD(new Date(Date.UTC(p.y,p.m-1+n,Math.min(p.d,last))))}
+function diffDaysS(a,b){const x=parseD(a),y=parseD(b);if(!x||!y)return 0;return Math.round((Date.UTC(y.y,y.m-1,y.d)-Date.UTC(x.y,x.m-1,x.d))/864e5)}
+function fmtD(s){const p=parseD(s);return p?String(p.d).padStart(2,"0")+"."+String(p.m).padStart(2,"0")+"."+p.y:""}
+const pad2=n=>String(n).padStart(2,"0"),rnd=x=>Math.round((x+Number.EPSILON)*100)/100;
+function easterT(y){const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,L=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*L)/451),n=h+L-7*m+114;return Date.UTC(y,Math.floor(n/31)-1,n%31+1)}
+function bankHol(t){const d=new Date(t),m=d.getUTCMonth()+1,x=d.getUTCDate();if((m===1&&x===1)||(m===5&&x===1)||(m===12&&(x===25||x===26)))return true;const e=easterT(d.getUTCFullYear());return t===e-2*864e5||t===e+864e5}
+function bizDay(y,m0,d){let t=Date.UTC(y,m0,d);for(;;){const w=new Date(t).getUTCDay();if(w===0||w===6||bankHol(t))t+=864e5;else break}return isoD(new Date(t))}
+function d360(a,b){const x=parseD(a),y=parseD(b);if(!x||!y)return 0;return(y.y-x.y)*360+(y.m-x.m)*30+(Math.min(y.d,30)-Math.min(x.d,30))}
+/* Bank-Logik: Rate fällig am 1. des Monats (Wochenende/Feiertag -> nächster Bankarbeitstag), Zinsen 30/360 auf tatsächliche Zahltermine,
+   Karenzzinsen (Auszahlung -> 1. Rate) stecken in der 1. Rate, Rate = aufgerundet auf Cent, letzte Rate = Restschuld + Zinsen. */
+function loanPlan(l,sp){
+  const A=l.amount,r=l.rate/100,i=r/12,hol=new Set(l.hol||[]),[sy,sm]=l.start.split("-").map(Number);
+  let N=l.term;if(l.payout){const p=parseD(l.payout);N=(p.y*12+p.m-1)+l.term-(sy*12+sm-1)+1}
+  if(!(N>=1))return null;
+  const due=k=>{const d=new Date(Date.UTC(sy,sm-1+k,1));return bizDay(d.getUTCFullYear(),d.getUTCMonth(),1)};
+  const d0=due(0),p0=l.payout||addMonthsS(sy+"-"+pad2(sm)+"-01",-1),g=d360(p0,d0);
+  const pays=k=>!hol.has((sm-1+k)%12);
+  let cnt=0,sf=0;for(let k=0;k<N;k++)if(pays(k)){cnt++;sf+=Math.pow(1+i,N-1-k)}
   if(!cnt)return null;
-  const P=A*Math.pow(1+i,n)/sf,total=P*cnt,now=new Date();
-  const el=Math.max(0,Math.min(n,(now.getFullYear()-sy)*12+now.getMonth()-m0));
-  let b=A;for(let k=0;k<el;k++){b=b*(1+i)-(pays(k)?P:0)}
-  return{P,total,interest:total-A,el,left:Math.max(0,b)};
+  const calculatedP=Math.ceil(A*(1+r*g/360)*Math.pow(1+i,N-1)/sf*100-1e-7)/100;
+  const P=Number(l.payment)>0?rnd(Number(l.payment)):calculatedP;
+  let kS=null;if(sp){const[y2,m2]=sp.from.split("-").map(Number);kS=(y2-sy)*12+m2-sm}
+  let b=A,prev=p0,rows=[],ti=0,tp=0,ts=0;
+  for(let k=0;k<N&&b>0.005;k++){
+    const d=due(k),it=rnd(b*r*d360(prev,d)/360);prev=d;
+    let pay=pays(k)?P:0;if(k===N-1||pay>rnd(b+it))pay=rnd(b+it);
+    let s=0;
+    if(sp&&k>=kS&&(sp.mode==="m"||(sp.mode==="y"&&(k-kS)%12===0)||(sp.mode==="o"&&k===kS)))s=Math.min(sp.amt,Math.max(0,rnd(b+it-pay)));
+    b=rnd(b+it-pay-s);if(b<0.005)b=0;
+    rows.push({k,d,date:fmtD(d),pay,int:it,pr:rnd(pay-it),sp:s,bal:b});ti+=it;tp+=pay;ts+=s;
+  }
+  return{rows,P,N,g,p0,interest:rnd(ti),total:rnd(tp+ts),months:rows.length,end:rows.length?rows[rows.length-1].date:"",sp:ts};
+}
+const schedule=loanPlan;
+function graceInt(l){if(!l.payout)return 0;const s=loanPlan(l,null);return s?s.rows[0].int:0}
+function loanCalc(l){
+  const s=loanPlan(l,null);if(!s)return null;
+  const n=new Date(),today=n.getFullYear()+"-"+pad2(n.getMonth()+1)+"-"+pad2(n.getDate());
+  const el=s.rows.filter(r=>r.d<=today).length;
+  return{P:s.P,total:s.total,interest:s.interest,g:l.payout?s.rows[0].int:0,el,N:s.N,left:el?s.rows[el-1].bal:l.amount,plan:s};
 }
 function loanCard(l){
   const c=loanCalc(l);if(!c)return"";
-  const pct=Math.round(c.el/l.term*100),hol=(l.hol||[]).slice().sort((a,b)=>a-b).map(monthName).join(", ");
+  const pct=Math.round(c.el/c.N*100),hol=(l.hol||[]).slice().sort((a,b)=>a-b).map(monthName).join(", ");
   const pc=v=>v.toLocaleString("de-DE",{maximumFractionDigits:2})+" %";
   return`<div class="card"><div class="ph"><h2>${esc(l.name)}</h2><button class="s k" data-a="lMenu" data-l="${l.id}" aria-label="Menü">⋯</button></div>
-  <div class="tag">${eur(l.amount)} · ${t('loanBoundShort')} ${pc(l.rate)}${l.eff!==null&&l.eff!==undefined?` · ${t('loanEffShort')} ${pc(l.eff)}`:""} · ${l.term} ${settings.lang==='en'?'mo.':settings.lang==='tr'?'ay':'Mon.'}${hol?` · ${t('loanHolShort')}: ${esc(hol)}`:""}</div>
   <div class="pbar"><i style="width:${pct}%"></i></div>
-  <div class="lmeta">${c.el} / ${l.term} ${t('loanProgress')} (${pct} %) · ${t('loanLeft')} ${eur(c.left)}</div>
-  <div class="lgrid"><div><small>${t('loanRate')}</small><b>${eur(c.P)}</b></div><div><small>${t('loanInterest')}</small><b class="out">${eur(c.interest)}</b></div><div><small>${t('loanTotal')}</small><b>${eur(c.total)}</b></div></div>${l.note?`<div class="note-v">${esc(l.note)}</div>`:""}</div>`;
+  <div class="lmeta">${c.el} / ${c.N} ${t('loanProgress')} (${pct} %) · ${t('loanLeft')} ${eur(c.left)}</div>
+  <div class="lgrid"><div><small>${t('loanRate')}</small><b>${eur(c.P)}</b></div><div><small>${t('loanInterest')}</small><b class="out">${eur(c.interest)}</b></div><div><small>${t('loanTotal')}</small><b>${eur(c.total)}</b></div></div><div class="meta2">
+  <div class="tag">${eur(l.amount)} · ${t('loanBoundShort')} ${pc(l.rate)}${l.eff!==null&&l.eff!==undefined?` · ${t('loanEffShort')} ${pc(l.eff)}`:""} · ${l.term} ${settings.lang==='en'?'mo.':settings.lang==='tr'?'ay':'Mon.'}${hol?` · ${t('loanHolShort')}: ${esc(hol)}`:""}</div>
+  ${l.payout?`<div class="tag">${t('loanPayoutShort')} ${fmtD(l.payout)} · ${t('loanGraceShort')} ${c.plan.g} ${t('graceDaysShort')} → ${fmtD(c.plan.rows[0].d)}</div>`:""}
+  </div>${c.g>0?`<div class="lmeta">${t('graceInclNote')}: <span class="out">${eur(c.g)}</span></div>`:""}${l.note?`<div class="note-v">${esc(l.note)}</div>`:""}</div>`;
 }
 function loanDlg(x){
   const isNew=!x,now=new Date();
-  x=x||{name:"",amount:"",rate:"",eff:"",hol:[],term:"",start:now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")};
+  x=x||{name:"",amount:"",rate:"",eff:"",hol:[],term:"",start:now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0"),payout:"",graceVal:"",graceUnit:"d",startDate:""};
+  const sd0=x.startDate||(x.start?x.start+"-01":"");
   const h=H();
   ask(`<h2>${isNew?t('loanNew'):t('loanEdit')}</h2>
   <label>${t('loanName')}</label><input id="ln" value="${esc(x.name)}">
   <label>${t('loanNet')}</label><input id="la" type="number" step="0.01" min="0" value="${x.amount}">
   <label>${t('loanBound')}</label><input id="lr" type="number" step="0.01" min="0" value="${x.rate}">
   <label>${t('loanEff')}</label><input id="le" type="number" step="0.01" min="0" value="${x.eff??""}">
+  <label>${t('loanContractRate')}</label><input id="lpmt" type="number" step="0.01" min="0" value="${x.payment??""}">
   <label>${t('loanTerm')}</label><input id="lt" type="number" step="1" min="1" max="600" value="${x.term}">
-  <label>${t('loanStart')}</label><input id="ls" type="month" value="${x.start}">
+  <label>${t('loanPayout')}</label><input id="lpo" type="date" value="${x.payout||""}">
+  <label>${t('loanStartDate')}</label><input id="ls" type="date" value="${sd0}">
+  <label>${t('loanGrace')}<span class="pill on" id="lgm" role="button"></span></label><div class="two2"><input id="lgv" type="number" step="1" min="0" value="${x.graceVal??""}"><select id="lgu"><option value="d"${x.graceUnit!=="m"?" selected":""}>${t('graceDays')}</option><option value="m"${x.graceUnit==="m"?" selected":""}>${t('graceMonths')}</option></select></div>
+  <div class="spres" id="lgr"></div><div class="tag">${t('graceHint')}</div>
   <label>${t('noteLabel')}</label><textarea id="lnote" class="note" maxlength="500" placeholder="${t('notePh')}">${esc(x.note||"")}</textarea>
   <label>${t('loanHol')}</label><div class="chips">${Array.from({length:12},(_,m)=>`<label><input type="checkbox" class="lh" value="${m}"${(x.hol||[]).includes(m)?" checked":""}>${monthName(m)}</label>`).join("")}</div>
   <div class="tag" style="margin-top:6px">${t('loanHolNone')}</div>`,()=>{
     const n=document.getElementById("ln").value.trim(),a=parseFloat(document.getElementById("la").value),r=parseFloat(document.getElementById("lr").value),
       ev=document.getElementById("le").value.trim(),e=ev===""?null:parseFloat(ev),term=parseInt(document.getElementById("lt").value,10),st=document.getElementById("ls").value,
-      hol=[...document.querySelectorAll(".lh:checked")].map(c=>+c.value);
+      hol=[...document.querySelectorAll(".lh:checked")].map(c=>+c.value),
+      po=document.getElementById("lpo").value,gvRaw=document.getElementById("lgv").value,gu=document.getElementById("lgu").value,gv=gvRaw===""?0:parseInt(gvRaw,10);
     if(!n||!(a>0)||isNaN(r)||r<0||(e!==null&&(isNaN(e)||e<0))||!(term>=1)||!st||hol.length>=12||hol.length>=term)return false;
-    const d={name:n,amount:a,rate:r,eff:e,hol,term,start:st,note:document.getElementById("lnote").value.trim()};
+    if(isNaN(gv)||gv<0||(po&&st<po))return false;
+    const pv=document.getElementById("lpmt").value.trim(),payment=pv===""?0:parseFloat(pv);
+    if(!Number.isFinite(payment)||payment<0)return false;
+    const d={name:n,amount:a,rate:r,eff:e,payment,hol,term,start:st.slice(0,7),startDate:st,payout:po||"",graceVal:po?gv:0,graceUnit:gu==="m"?"m":"d",note:document.getElementById("lnote").value.trim()};
     if(isNew)h.loans.push({id:uid(),...d});else Object.assign(x,d);
   });
-}
-function schedule(l,sp){
-  const A=l.amount,n=l.term,i=l.rate/100/12,hol=new Set(l.hol||[]);
-  const [sy,sm]=l.start.split("-").map(Number),m0=sm-1,P=loanCalc(l).P;
-  let kS=null;if(sp){const[y2,m2]=sp.from.split("-").map(Number);kS=(y2-sy)*12+m2-1-m0}
-  let b=A,rows=[],ti=0,tp=0,ts=0;
-  for(let k=0;k<n&&b>0.005;k++){
-    const it=b*i;let pay=hol.has((m0+k)%12)?0:P;
-    if(k===n-1||pay>b+it)pay=b+it;
-    let s=0;
-    if(sp&&k>=kS&&(sp.mode==="m"||(sp.mode==="y"&&(k-kS)%12===0)||(sp.mode==="o"&&k===kS)))s=Math.min(sp.amt,Math.max(0,b+it-pay));
-    b=b+it-pay-s;if(b<0.005)b=0;
-    const d=new Date(sy,m0+k,1);
-    rows.push({k,date:String(d.getMonth()+1).padStart(2,"0")+"."+d.getFullYear(),pay,int:it,pr:pay-it,sp:s,bal:b});
-    ti+=it;tp+=pay;ts+=s;
-  }
-  return{rows,interest:ti,total:tp+ts,months:rows.length,end:rows.length?rows[rows.length-1].date:"",sp:ts};
+  const $=id=>document.getElementById(id);
+  const upG=()=>{
+    const a=parseFloat($("la").value),r=parseFloat($("lr").value),tm=parseInt($("lt").value,10),po=$("lpo").value,sd=$("ls").value,pv=parseFloat($("lpmt").value)||0;
+    if(!(a>0)||isNaN(r)||!(tm>=1)||!sd){$("lgr").innerHTML="";return}
+    const pl=loanPlan({amount:a,rate:r,payment:pv,term:tm,payout:po,start:sd.slice(0,7),hol:[...document.querySelectorAll(".lh:checked")].map(c=>+c.value)},null);
+    $("lgr").innerHTML=pl?`${po?`<span class="out">${t('loanGrace')}: ${pl.g} ${t('graceDaysShort')} · ${t('graceInterest')}: ${eur(pl.rows[0].int)}</span><br>`:""}${t('loanRate')}: <b>${eur(pl.P)}</b> · ${pl.N} ${t('loanPayCount')} · ${fmtD(pl.rows[0].d)} → ${fmtD(pl.rows[pl.rows.length-1].d)}`:"";
+  };
+  const fromGrace=()=>{
+    const po=$("lpo").value,v=$("lgv").value;
+    if(po&&v!==""&&+v>=0){$("ls").value=$("lgu").value==="m"?addMonthsS(po,+v):addDaysS(po,+v)}
+    upG();
+  };
+  const fromStart=()=>{
+    const po=$("lpo").value,sd=parseD($("ls").value);
+    if(po&&sd){const dd=d360(po,bizDay(sd.y,sd.m-1,1));if(dd>=0){$("lgv").value=dd;$("lgu").value="d"}}
+    upG();
+  };
+  let man=false;const pill=()=>{const p=$("lgm");p.textContent=man?t('graceManual'):t('graceAuto');p.classList.toggle("on",!man)};
+  const setMan=()=>{man=true;pill();fromGrace()};
+  $("lpo").oninput=()=>man?fromGrace():fromStart();$("lgv").oninput=setMan;$("lgu").onchange=setMan;
+  $("ls").oninput=()=>{man=false;pill();fromStart()};$("lgm").onclick=()=>{man=false;pill();fromStart()};pill();
+  ["la","lr","lt","lpmt"].forEach(id=>$(id).oninput=upG);
+  document.querySelectorAll(".lh").forEach(c=>c.onchange=upG);
+  upG();
 }
 function planDlg(l){
   const now=new Date(),ym=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0"),from=ym>l.start?ym:l.start;
@@ -514,8 +584,9 @@ function planDlg(l){
     $("spR").innerHTML=sp?`<span class="in">${t('spSaved')}: ${eur(base.interest-sc.interest)}</span><br>${t('spShort')}: ${base.months-sc.months} ${t('spMonths')} · ${t('spEnd')}: ${sc.end}`:`<span class="tag">${t('spNone')}</span>`;
     const rate=loanCalc(l).P;
     $("pl").innerHTML=`<div class="lgrid"><div><small>${t('loanRate')}</small><b>${eur(rate)}</b></div><div><small>${t('loanInterest')}</small><b class="out">${eur(sc.interest)}</b></div><div><small>${t('loanTotal')}</small><b>${eur(sc.total)}</b></div></div>
+    ${graceInt(l)>0?`<div class="lmeta">${t('graceInclNote')}: <span class="out">${eur(graceInt(l))}</span> (${fmtD(l.payout)} → ${base.rows[0].date})</div>`:""}
     <div class="plan-wrap"><table><tr><th>${t('colDate')}</th><th class="n">${t('colRate')}</th><th class="n">${t('colInt')}</th><th class="n">${t('colPrin')}</th>${sp?`<th class="n">${t('colSp')}</th>`:""}<th class="n">${t('colBal')}</th></tr>
-    ${sc.rows.map(r=>`<tr class="${r.k<loanCalc(l).el?"paid":""}${r.sp?" spr":""}"><td>${r.date}</td><td class="n">${eur(r.pay)}</td><td class="n out">${eur(r.int)}</td><td class="n in">${eur(r.pr)}</td>${sp?`<td class="n">${r.sp?eur(r.sp):"–"}</td>`:""}<td class="n">${eur(r.bal)}</td></tr>`).join("")}</table></div>
+    ${l.payout?`<tr><td>${fmtD(l.payout)}</td><td class="n">–</td><td class="n">–</td><td class="n">–</td>${sp?"<td></td>":""}<td class="n">${eur(l.amount)}</td></tr>`:""}${sc.rows.map(r=>`<tr class="${r.k<loanCalc(l).el?"paid":""}${r.sp?" spr":""}"><td>${r.date}</td><td class="n">${eur(r.pay)}</td><td class="n out">${eur(r.int)}</td><td class="n in">${eur(r.pr)}</td>${sp?`<td class="n">${r.sp?eur(r.sp):"–"}</td>`:""}<td class="n">${eur(r.bal)}</td></tr>`).join("")}</table></div>
     ${(l.hol||[]).length?`<div class="tag" style="margin-top:8px">${t('holNote')}</div>`:""}`;
   };
   ["spA","spM","spF"].forEach(id=>{$(id).oninput=upd;$(id).onchange=upd});
@@ -572,7 +643,7 @@ function importData(txt){
   if(!Array.isArray(a)||!a.length)throw 0;
   const num=v=>{v=parseFloat(v);return isFinite(v)&&v>=0?v:0};
   const ne=x=>({id:uid(),name:String(x.name||"").slice(0,80),cat:CATS.concat(ICATS).includes(x.cat)?x.cat:"Sonstiges",amount:num(x.amount),freq:FREQ[x.freq]?x.freq:"m",note:String(x.note||"").slice(0,500)});
-  const nh=a.map(h=>({id:uid(),name:String(h.name||"Haushalt").slice(0,80),persons:(h.persons||[]).map(p=>({id:uid(),name:String(p.name||"Person").slice(0,80),inc:(p.inc||[]).map(ne),exp:(p.exp||[]).map(ne)})),loans:(h.loans||[]).filter(l=>l&&l.amount>0&&l.term>=1&&/^\d{4}-\d{2}$/.test(l.start||"")).map(l=>({id:uid(),name:String(l.name||"Kredit").slice(0,80),amount:num(l.amount),rate:num(l.rate),eff:l.eff==null?null:num(l.eff),hol:(l.hol||[]).map(Number).filter(m=>m>=0&&m<12),note:String(l.note||"").slice(0,500),term:parseInt(l.term,10),start:l.start}))}));
+  const nh=a.map(h=>({id:uid(),name:String(h.name||"Haushalt").slice(0,80),persons:(h.persons||[]).map(p=>({id:uid(),name:String(p.name||"Person").slice(0,80),inc:(p.inc||[]).map(ne),exp:(p.exp||[]).map(ne)})),loans:(h.loans||[]).filter(l=>l&&l.amount>0&&l.term>=1&&/^\d{4}-\d{2}$/.test(l.start||"")).map(l=>({id:uid(),name:String(l.name||"Kredit").slice(0,80),amount:num(l.amount),rate:num(l.rate),eff:l.eff==null?null:num(l.eff),hol:(l.hol||[]).map(Number).filter(m=>m>=0&&m<12),note:String(l.note||"").slice(0,500),term:parseInt(l.term,10),start:l.start,payout:/^\d{4}-\d{2}-\d{2}$/.test(l.payout||"")?l.payout:"",startDate:/^\d{4}-\d{2}-\d{2}$/.test(l.startDate||"")?l.startDate:"",graceVal:Math.max(0,parseInt(l.graceVal,10)||0),graceUnit:l.graceUnit==="m"?"m":"d"}))}));
   if(S.hh.length===1&&!S.hh[0].persons.length)S.hh=nh;else S.hh.push(...nh);
   S.cur=nh[0].id;
 }
@@ -651,6 +722,10 @@ function renderSettingsMain() {
       </select>
     </div>
     <div class="settings-section">
+      <div class="settings-title">🗑 ${t('trash')}</div>
+      <div class="legal-card" id="btnTrash"><span><strong>${t('trash')}</strong> (${S.trash.length})<br><small style="color:var(--mu);">${t('trashSub')}</small></span><span>➔</span></div>
+    </div>
+    <div class="settings-section">
       <div class="settings-title">${t('legal')}</div>
       <div class="legal-card" id="btnImpressum">
         <span><strong>${t('impressumTitle')}</strong><br><small style="color:var(--mu);">${t('impressumSub')}</small></span>
@@ -674,11 +749,22 @@ function renderSettingsMain() {
     renderSettingsMain();
     render();
   };
+  document.getElementById("btnTrash").onclick = () => renderTrashPage();
   document.getElementById("btnImpressum").onclick = () => renderLegalPage("Impressum");
   document.getElementById("btnDatenschutz").onclick = () => renderLegalPage("Datenschutz");
   document.getElementById("cx").onclick = () => dlg.close();
 }
 
+function renderTrashPage(msg) {
+  const loc=settings.lang==='tr'?'tr-TR':settings.lang==='en'?'en-GB':'de-DE';
+  dlg.innerHTML=`<h2>🗑 ${t('trash')}</h2>${msg?`<div class="tag out" style="margin-top:6px">${msg}</div>`:""}
+  <div class="legal-content">${S.trash.map(e=>`<div class="trow"><div><b>${esc(e.name)}</b><div class="tag">${e.kind==="loan"?t('kLoan'):t('kEntry')+(e.pn?" · "+esc(e.pn):"")}${e.item&&e.item.amount!=null&&e.kind!=="loan"?" · "+eur(e.item.amount):""} · ${t('trashDel')} ${new Date(e.at).toLocaleDateString(loc)}</div></div><button class="s p" data-r="${e.id}">${t('restore')}</button></div>`).join("")||`<div class="empty">${t('trashEmpty')}</div>`}</div>
+  <div class="row"><button id="btnBack">${t('backToSettings')}</button>${S.trash.length?`<button id="btnClr" class="d">${t('trashClear')}</button>`:""}<button id="cx">${t('close')}</button></div>`;
+  document.getElementById("btnBack").onclick=()=>renderSettingsMain();
+  document.getElementById("cx").onclick=()=>dlg.close();
+  const c=document.getElementById("btnClr");if(c)c.onclick=()=>confirmDlg(t('trashClear'),t('trashClearMsg'),t('trashClear'),()=>{S.trash=[]});
+  dlg.querySelectorAll("button[data-r]").forEach(b=>b.onclick=()=>renderTrashPage(trashRestore(b.dataset.r)?"":t('trashNoTarget')));
+}
 function renderLegalPage(type) {
   let content = "";
   if(type === "Impressum") {
@@ -829,15 +915,15 @@ document.getElementById("app").onclick=ev=>{
   if(a==="lMenu"){const l=h.loans.find(y=>y.id===b.dataset.l);return openMenu(b,[
     [t('menuPlan'),()=>planDlg(l)],
     [t('menuEdit'),()=>loanDlg(l)],
-    [t('delete'),()=>confirmDlg(t('loanDelTitle'),`„${esc(l.name)}“`,t('delete'),()=>{h.loans=h.loans.filter(y=>y!==l)}),"d"]])}
+    [t('delete'),()=>confirmDlg(t('loanDelTitle'),`„${esc(l.name)}“`,t('delete'),()=>{trashAdd({kind:"loan",hh:h.id,item:l,name:l.name});h.loans=h.loans.filter(y=>y!==l)}),"d"]])}
   if(a==="pAdd")nameDlg(t('addPerson'),"",v=>h.persons.persons?.push ? h.persons.push({id:uid(),name:v,inc:[],exp:[]}) : h.persons.push({id:uid(),name:v,inc:[],exp:[]}));
   else if(a==="pMenu")openMenu(b,[
     [t('rename'),()=>nameDlg(t('renamePerson'),p.name,v=>p.name=v)],
     [t('delete'),()=>confirmDlg(t('deletePersonConfirmTitle'),`„${esc(p.name)}“`,t('delete'),()=>{h.persons=h.persons.filter(q=>q!==p)}),"d"]]);
   else if(a==="eAdd")entryDlg(p,tName);
   else if(a==="eMenu"){const x=p[tName].find(y=>y.id===b.dataset.i);openMenu(b,[
-    [t('rename'),()=>entryDlg(p,tName,x)],
-    [t('delete'),()=>{p[tName]=p[tName].filter(y=>y!==x);save();render()},"d"]])}
+    [t('menuEdit'),()=>entryDlg(p,tName,x)],
+    [t('delete'),()=>confirmDlg(t('delEntryTitle'),`„${esc(x.name)}“ – ${t('delEntryMsg')}`,t('delete'),()=>{trashAdd({kind:"entry",hh:h.id,p:p.id,pn:p.name,tn:tName,item:x,name:x.name});p[tName]=p[tName].filter(y=>y!==x)}),"d"]])}
 };
 render();
 if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
