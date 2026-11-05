@@ -96,6 +96,28 @@ dialog{max-height:92vh;overflow-y:auto}.plan-wrap{max-height:42vh;overflow:auto;
 @media(max-width:640px){.lgrid{grid-template-columns:1fr}}
 .pill{display:inline-block;margin-left:6px;padding:1px 9px;border-radius:99px;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:var(--bg);border:1px solid var(--bd);color:var(--mu);cursor:pointer;vertical-align:1px}.pill.on{color:var(--ac);border-color:var(--ac)}
 .meta2{margin-top:12px;display:grid;gap:2px}.trow{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--bd)}.trow>div{flex:1;min-width:0;overflow-wrap:anywhere}.trow:first-of-type{border-top:0}
+
+/* ===== Nettolohnrechner ===== */
+.nl-head h2{margin:0 0 4px;font-size:clamp(19px,2.6vw,24px);letter-spacing:-.4px}.nl-head p{margin:0;color:var(--mu);font-size:13px}
+.nl-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}.nl-top button{font-size:13px}
+.nl-form .nl-row{display:grid;grid-template-columns:minmax(150px,34%) minmax(0,1fr);gap:8px 16px;align-items:center;padding:11px 0;border-top:1px solid var(--bd)}
+.nl-form .nl-row:first-child{border-top:0}.nl-row[hidden]{display:none}
+.nl-row>.nl-lab{font-size:13px;font-weight:600;color:var(--tx);display:flex;align-items:center;gap:6px;margin:0}
+.nl-i{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;border:1px solid var(--bd);background:var(--bg);color:var(--mu);font-size:11px;font-weight:700;padding:0;cursor:pointer;flex-shrink:0}.nl-i:hover,.nl-i.on{color:var(--ac);border-color:var(--ac);transform:none}
+.nl-hint{grid-column:1/-1;background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:9px 12px;font-size:12px;color:var(--mu);line-height:1.55}.nl-hint[hidden]{display:none}
+.nl-inp{display:flex;align-items:center;gap:8px}.nl-inp input{flex:1;min-width:0}.nl-inp span{color:var(--mu);font-size:13px;white-space:nowrap}
+.nl-seg{justify-self:start;display:inline-flex;border:1px solid var(--bd);border-radius:10px;overflow:hidden;background:var(--card)}.nl-seg label{margin:0;padding:8px 16px;font-size:13px;font-weight:600;color:var(--tx);cursor:pointer;border-left:1px solid var(--bd);display:flex;align-items:center}.nl-seg label:first-child{border-left:0}.nl-seg input{position:absolute;opacity:0;pointer-events:none;width:0;height:0}.nl-seg label:has(input:checked){background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff}.nl-seg label:has(input:focus-visible){outline:2px solid var(--ac);outline-offset:-2px}
+.nl-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:8px}
+.nl-act{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:18px;padding-top:16px;border-top:1px solid var(--bd)}.nl-act .p{padding:11px 28px;font-size:14px}
+.nl-link{background:none;border:0;padding:4px 2px;font-size:13px;font-weight:600;color:var(--ac);cursor:pointer;text-decoration:underline;text-underline-offset:3px}.nl-link:hover{transform:none}
+.nl-err{color:var(--out);font-size:12px;margin-top:6px}
+.nl-res{margin-top:16px}.nl-res h3{margin:0 0 12px;font-size:16px}
+.nl-stack{display:flex;height:14px;border-radius:99px;overflow:hidden;background:var(--bd);margin:6px 0 10px}.nl-stack i{display:block;height:100%}
+.nl-leg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--mu);margin-bottom:6px}.nl-leg span:before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);margin-right:6px}
+.nl-res tr.tot td{font-weight:700;border-top:2px solid var(--bd)}.nl-res tr.sub td{color:var(--mu)}
+.nl-note{font-size:12px;color:var(--mu);margin-top:12px;line-height:1.55}.nl-warn{background:var(--outb);color:var(--out);border-radius:10px;padding:9px 12px;font-size:12px;margin-top:10px}
+.nl-info{margin-top:16px}.nl-info details{border-top:1px solid var(--bd);padding:10px 0}.nl-info details:first-of-type{border-top:0}.nl-info summary{cursor:pointer;font-weight:600;font-size:14px}.nl-info p{margin:8px 0 0;color:var(--mu);font-size:13px;line-height:1.6}
+@media(max-width:640px){.nl-form .nl-row{grid-template-columns:1fr;gap:6px}.nl-two{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -123,6 +145,7 @@ dialog{max-height:92vh;overflow-y:auto}.plan-wrap{max-height:42vh;overflow:auto;
       </summary>
       <div class="dropdown-panel">
         <button id="hAdd"><span>＋</span> <span id="lblAdd">Neuer Haushalt</span></button>
+        <button id="hNetto"><span>🧮</span> <span id="lblNetto">Nettolohnrechner</span></button>
         <button id="hData"><span>⇅</span> <span id="lblData">Export / Import</span></button>
         <button id="hSettings"><span>⚙</span> <span id="lblSettings">Einstellungen</span></button>
       </div>
@@ -151,7 +174,7 @@ const I18N = {
     manageHH: "Haushalt verwalten",
     incomeMonth: "Einnahmen / Monat",
     expenseMonth: "Ausgaben / Monat",
-    availableBudget: "Verfügbares Budget",
+    availableBudget: "Verfügbar / Monat",
     expenseYear: "Ausgaben / Jahr",
     overviewPerson: "Übersicht pro Person",
     person: "Person",
@@ -353,13 +376,17 @@ Object.assign(I18N.de,{loanPayout:"Auszahlungstag",loanGrace:"Karenzzeit",graceD
 Object.assign(I18N.en,{loanPayout:"Payout date",loanGrace:"Grace period",graceDays:"Days",graceMonths:"Months",loanStartDate:"Repayment start (first instalment)",graceInterest:"Grace interest",graceInclNote:"of which grace interest",graceHint:"Interest from payout date to repayment start (nominal rate, days: 365/year). Added to interest amount and total amount.",loanPayoutShort:"Payout",loanGraceShort:"Grace",graceDaysShort:"days",graceMonthsShort:"mo."});
 Object.assign(I18N.tr,{loanPayout:"Ödeme tarihi",loanGrace:"Ödemesiz dönem",graceDays:"Gün",graceMonths:"Ay",loanStartDate:"Geri ödeme başlangıcı (ilk taksit)",graceInterest:"Ödemesiz dönem faizi",graceInclNote:"bunun ödemesiz dönem faizi",graceHint:"Ödeme tarihinden geri ödeme başlangıcına kadar faiz (nominal faiz, gün: 365/yıl). Faiz tutarına ve toplam tutara eklenir.",loanPayoutShort:"Ödeme",loanGraceShort:"Ödemesiz",graceDaysShort:"gün",graceMonthsShort:"ay"});
 
-Object.assign(I18N.de,{loanProgress:"Raten bezahlt",loanPayCount:"Raten",loanTerm:"Laufzeit (Monate; mit Auszahlungstag ab Auszahlung)",graceHint:"Karenzzeit = Tage Auszahlung → 1. Rate (30/360). Die Karenzzinsen stecken in der 1. Rate, die Darlehensrate wird daraus berechnet. Raten fällig am 1. des Monats (Wochenende/Feiertag → nächster Bankarbeitstag)."});
+Object.assign(I18N.de,{loanProgress:"Raten bezahlt",loanPayCount:"Raten",loanTerm:"Laufzeit (Monate)",graceHint:"Karenzzeit = Tage Auszahlung → 1. Rate (30/360). Die Karenzzinsen stecken in der 1. Rate, die Darlehensrate wird daraus berechnet. Raten fällig am 1. des Monats (Wochenende/Feiertag → nächster Bankarbeitstag)."});
 Object.assign(I18N.en,{loanProgress:"payments made",loanPayCount:"payments",loanTerm:"Term (months; with payout date: from payout)",graceHint:"Grace period = days payout → 1st instalment (30/360). Grace interest is part of the 1st instalment and the instalment is calculated from it. Due on the 1st of the month (weekend/holiday → next bank day)."});
 Object.assign(I18N.tr,{loanProgress:"taksit ödendi",loanPayCount:"taksit",loanTerm:"Vade (ay; ödeme tarihi varsa ödemeden itibaren)",graceHint:"Ödemesiz dönem = ödeme tarihi → 1. taksit arası gün (30/360). Faiz 1. taksitte yer alır, taksit buna göre hesaplanır. Ayın 1'inde vadeli (hafta sonu/tatil → sonraki iş günü)."});
 
 Object.assign(I18N.de,{graceAuto:"automatisch",graceManual:"manuell",trash:"Papierkorb",trashSub:"Gelöschte Einträge wiederherstellen",trashEmpty:"Der Papierkorb ist leer.",restore:"Wiederherstellen",trashClear:"Papierkorb leeren",trashClearMsg:"Alle Einträge im Papierkorb werden endgültig gelöscht.",delEntryTitle:"Eintrag löschen?",delEntryMsg:"Der Eintrag wird in den Papierkorb verschoben.",trashDel:"gelöscht am",trashNoTarget:"Wiederherstellen nicht möglich: Haushalt oder Person existiert nicht mehr.",kEntry:"Eintrag",kLoan:"Kredit"});
 Object.assign(I18N.en,{graceAuto:"automatic",graceManual:"manual",trash:"Trash",trashSub:"Restore deleted entries",trashEmpty:"Trash is empty.",restore:"Restore",trashClear:"Empty trash",trashClearMsg:"All items in the trash will be deleted permanently.",delEntryTitle:"Delete entry?",delEntryMsg:"The entry will be moved to the trash.",trashDel:"deleted on",trashNoTarget:"Cannot restore: household or person no longer exists.",kEntry:"Entry",kLoan:"Loan"});
 Object.assign(I18N.tr,{graceAuto:"otomatik",graceManual:"manuel",trash:"Çöp kutusu",trashSub:"Silinen kayıtları geri yükle",trashEmpty:"Çöp kutusu boş.",restore:"Geri yükle",trashClear:"Çöpü boşalt",trashClearMsg:"Çöp kutusundaki tüm kayıtlar kalıcı olarak silinecek.",delEntryTitle:"Kayıt silinsin mi?",delEntryMsg:"Kayıt çöp kutusuna taşınacak.",trashDel:"silinme tarihi",trashNoTarget:"Geri yüklenemedi: hane veya kişi artık yok.",kEntry:"Kayıt",kLoan:"Kredi"});
+
+Object.assign(I18N.de,{nettoMenu:"Nettolohnrechner",nettoBack:"← Zurück zur Übersicht"});
+Object.assign(I18N.en,{nettoMenu:"Net salary calculator",nettoBack:"← Back to overview"});
+Object.assign(I18N.tr,{nettoMenu:"Net maaş hesaplayıcı",nettoBack:"← Genel bakışa dön"});
 
 let settings = { theme: 'system', lang: 'de' };
 try {
@@ -408,6 +435,7 @@ function updateStaticTexts() {
   document.getElementById("lblAdd").textContent = t('newHH');
   document.getElementById("lblData").textContent = t('exportImport');
   document.getElementById("lblSettings").textContent = t('settings');
+  document.getElementById("lblNetto").textContent = t('nettoMenu');
 }
 
 function render(){
@@ -415,6 +443,7 @@ function render(){
   const currentH = H();
   document.getElementById("hhCurrentName").textContent = currentH ? currentH.name : t('selectLang');
   document.getElementById("hhPanel").innerHTML = S.hh.map(h => `<button data-id="${h.id}">${esc(h.name)}</button>`).join("");
+  if(view==="netto"){renderNetto();return}
   
   const h=H();h.loans=h.loans||[];S.ui=S.ui||{};const ui={persons:S.ui.persons!==false,loans:S.ui.loans!==false};
   const inc=h.persons.reduce((a,p)=>a+sum(p.inc),0),exp=h.persons.reduce((a,p)=>a+sum(p.exp),0),bal=inc-exp;
@@ -627,12 +656,14 @@ document.getElementById("hhPanel").onclick=ev=>{
   const b=ev.target.closest("button[data-id]");
   if(!b)return;
   S.cur=b.dataset.id;
+  view="home";
   document.getElementById("hhDropdown").removeAttribute("open");
   save();
   render();
 };
 
 document.getElementById("hAdd").onclick=()=>{
+  view="home";
   document.querySelectorAll(".menu-dropdown").forEach(d=>d.removeAttribute("open"));
   nameDlg(t('newHH'),"",v=>{const h={id:uid(),name:v,persons:[]};S.hh.push(h);S.cur=h.id});
 };
@@ -925,6 +956,283 @@ document.getElementById("app").onclick=ev=>{
     [t('menuEdit'),()=>entryDlg(p,tName,x)],
     [t('delete'),()=>confirmDlg(t('delEntryTitle'),`„${esc(x.name)}“ – ${t('delEntryMsg')}`,t('delete'),()=>{trashAdd({kind:"entry",hh:h.id,p:p.id,pn:p.name,tn:tName,item:x,name:x.name});p[tName]=p[tName].filter(y=>y!==x)}),"d"]])}
 };
+
+/* ===================== Nettolohnrechner ===================== */
+let view="home";
+const NL_KEY="myfinances-netto-v1";
+const NL_Y={
+  2026:{gf:12348,tz:[17799,69878,277825],a:[914.51,1400],b:[173.1,2397,1034.87],c:[.42,11135.63],d:[.45,19470.38],bbgRV:101400,bbgKV:69750,zus:2.9,pvR:3.6,rvR:18.6,avR:2.6,soliFG:20350,kfb:9756,jaeg:77400,mG:603},
+  2025:{gf:12096,tz:[17443,68480,277825],a:[932.3,1400],b:[176.64,2397,1015.13],c:[.42,10911.92],d:[.45,19246.67],bbgRV:96600,bbgKV:66150,zus:2.5,pvR:3.6,rvR:18.6,avR:2.6,soliFG:19950,kfb:9600,jaeg:73800,mG:556}
+};
+const NL_LAENDER=["Baden-Württemberg","Bayern","Berlin","Brandenburg","Bremen","Hamburg","Hessen","Mecklenburg-Vorpommern","Niedersachsen","Nordrhein-Westfalen","Rheinland-Pfalz","Saarland","Sachsen","Sachsen-Anhalt","Schleswig-Holstein","Thüringen"];
+const NL_KASSEN=[["AOK Bayern",2.69],["AOK Baden-Württemberg",2.99],["AOK Hessen",2.98],["AOK Niedersachsen",2.98],["AOK Nordost",3.5],["AOK Nordwest",2.99],["AOK Plus",3.1],["AOK Rheinland-Pfalz/Saarland",2.47],["AOK Rheinland/Hamburg",3.29],["Bahn BKK",3.4],["Barmer",3.29],["Mobil Krankenkasse",3.89],["DAK-Gesundheit",3.2],["hkk Krankenkasse",2.59],["IKK classic",3.4],["IKK Südwest",3.25],["KKH Kaufmännische Krankenkasse",3.78],["Knappschaft",4.3],["mhplus Krankenkasse",3.5],["SBK – Siemens BKK",3.8],["Techniker Krankenkasse",2.69],["VIACTIV Krankenkasse",4.19]];
+const NL_DEF={mode:"brutto",amount:"",per:"m",year:"2026",sk:"1",faktor:"",kist:"n",land:"Baden-Württemberg",kv:"gkv",zus:"2,9",zusManual:false,kasse:"",pkv:"",pkvag:"j",kids:0,kfb:0,kfbManual:false,age:35,rv:"voll",av:"voll",std:40,gehaelter:12,ueberg:"j",bav:"",gwv:"",freib:"",kammer:"j",kvr:"14,6",ext:false};
+let NL=Object.assign({},NL_DEF);
+try{Object.assign(NL,JSON.parse(localStorage.getItem(NL_KEY)||"{}"))}catch(e){}
+NL.calced=false;
+const nlSave=()=>{try{const r=Object.assign({},NL);delete r.calced;localStorage.setItem(NL_KEY,JSON.stringify(r))}catch(e){}};
+const nlNum=v=>{if(v==null)return 0;let s=String(v).replace(/[€%\s]/g,"");if(s.includes(","))s=s.replace(/\./g,"").replace(",",".");else if((s.match(/\./g)||[]).length>1||/^\d{1,3}\.\d{3}$/.test(s))s=s.replace(/\./g,"");const n=parseFloat(s);return isFinite(n)&&n>=0?n:0};
+const nlPct=x=>(x*100).toFixed(1).replace(".",",")+" %";
+
+/* --- Steuertarif (§ 32a EStG) --- */
+function nlTarif(x,Y){x=Math.floor(x);if(x<=Y.gf)return 0;let t;
+  if(x<=Y.tz[0]){const y=(x-Y.gf)/1e4;t=(Y.a[0]*y+Y.a[1])*y}
+  else if(x<=Y.tz[1]){const z=(x-Y.tz[0])/1e4;t=(Y.b[0]*z+Y.b[1])*z+Y.b[2]}
+  else if(x<=Y.tz[2])t=Y.c[0]*x-Y.c[1];else t=Y.d[0]*x-Y.d[1];
+  return Math.floor(t)}
+function nlTarif56raw(x,Y){return Math.max((nlTarif(x*1.25,Y)-nlTarif(x*.75,Y))*2,x*.14)}
+function nlTarif56(x,Y){x=Math.floor(x);const W2=34939,W3=222260;
+  if(x>W2){let st=nlTarif56raw(W2,Y);st+=x>W3?(W3-W2)*.42+(x-W3)*.45:(x-W2)*.42;return Math.floor(st)}
+  return Math.floor(nlTarif56raw(x,Y))}
+
+/* --- Eingaben (im Grundformular gelten für erweiterte Felder die Standardwerte) --- */
+function nlEff(){const s=NL,e=s.ext,N=nlNum;
+  return{year:"2026",sk:s.sk,faktor:s.sk==="4F"?N(s.faktor):1,kist:s.kist==="j",land:s.land,kv:s.kv,zus:N(s.zus),
+    kvr:e?(N(s.kvr)||14.6):14.6,pkv:N(s.pkv),pkvag:s.pkvag==="j",kids:+s.kids,kfb:+s.kfb,
+    age:e?+s.age:35,rv:e?s.rv:"voll",av:e?s.av:"voll",ueberg:e?s.ueberg==="j":true,
+    bav:e?N(s.bav):0,gwv:e?N(s.gwv):0,freib:e?N(s.freib):0,kammer:e?s.kammer==="j":true,
+    std:e?+s.std:40,gehaelter:e?+s.gehaelter:12}}
+
+/* --- Berechnung (monatlich, Arbeitnehmer-Sicht) --- */
+function nlCalc(I,g){
+  const Y=NL_Y[I.year];
+  const bavTax=Math.min(I.bav,.08*Y.bbgRV/12),bavSv=Math.min(I.bav,.04*Y.bbgRV/12);
+  const taxM=Math.max(0,g+I.gwv-bavTax),svM=Math.max(0,g+I.gwv-bavSv);
+  const mini=I.ueberg&&svM<=Y.mG,mid=I.ueberg&&svM>Y.mG&&svM<=2000;
+  const G=Y.mG,F=Math.round(.28/((Y.rvR+Y.avR+14.6+Y.zus+Y.pvR)/100)*1e4)/1e4;
+  const BE=mid?F*G+(2000/(2000-G)-G/(2000-G)*F)*(svM-G):svM;
+  const bRV=Math.min(svM,Y.bbgRV/12),bKV=Math.min(svM,Y.bbgKV/12);
+  const an=(anR,agR,base)=>{if(mini||anR<=0)return 0;if(mid)return((anR+agR)*BE-agR*svM)/100;return anR*base/100};
+  const sv=(opt,rate)=>an((opt==="voll"||opt==="nurAN")?rate/2:0,(opt==="voll"||opt==="nurAG")?rate/2:0,bRV);
+  const rv=sv(I.rv,Y.rvR),av=sv(I.av,Y.avR);
+  let kv=0,pv=0;
+  if(I.kv==="pkv"){const zu=I.pkvag?Math.min(I.pkv/2,(7.3+Y.zus/2)/100*Y.bbgKV/12):0;kv=Math.max(0,I.pkv-zu)}
+  else{
+    const r=I.kvr/2+I.zus/2;kv=an(r,r,bKV);
+    const sax=I.land==="Sachsen";let pvAN=sax?2.3:1.8;const pvAG=sax?1.3:1.8;
+    if(I.kids===0&&I.age>=23)pvAN+=.6;else if(I.kids>=2)pvAN-=.25*Math.min(I.kids-1,4);
+    pv=an(pvAN,pvAG,bKV);
+  }
+  const ka=(I.kammer&&(I.land==="Bremen"||I.land==="Saarland")&&!mini)?.0015*bKV:0;
+  /* Lohnsteuer: Jahreshochrechnung */
+  /* Vorsorgepauschale (PAP 2026): RV voll, KV ohne Krankengeld-Anteil (0,6 %-Pkt.), PV – ohne ALV */
+  const kvTax=(I.kv==="pkv"||!(I.kvr/2+I.zus/2))?kv:kv*(((I.kvr-.6)/2+I.zus/2)/(I.kvr/2+I.zus/2));
+  const vsp=12*(rv+kvTax+pv);
+  const zve=Math.max(0,Math.floor(taxM*12-1230-36-vsp-I.freib-(I.sk==="2"?4260:0)));
+  const Y5=I.sk==="5"||I.sk==="6";
+  let lst,base;
+  if(Y5){lst=nlTarif56(zve,Y);base=lst}
+  else{
+    const f=z=>I.sk==="3"?2*nlTarif(Math.floor(z/2),Y):nlTarif(z,Y);
+    lst=f(zve);base=f(Math.max(0,zve-I.kfb*Y.kfb));
+    if(I.sk==="4F"){lst*=I.faktor;base*=I.faktor}
+  }
+  lst=Math.floor(lst);
+  const fg=Y.soliFG*(I.sk==="3"?2:1);
+  const soli=base<=fg?0:Math.floor(Math.min(base*.055,(base-fg)*.119)*100)/100;
+  const kist=I.kist?Math.floor(base*((I.land==="Bayern"||I.land==="Baden-Württemberg")?.08:.09)*100)/100:0;
+  const o={g,gwv:I.gwv,bav:I.bav,lst:lst/12,soli:soli/12,kist:kist/12,ka,kv,pv,rv,av,mini,mid,svM};
+  o.abz=o.lst+o.soli+o.kist+ka+kv+pv+rv+av;
+  o.net=g-I.bav-o.abz;
+  return o;
+}
+function nlSolve(I,target){let lo=0,hi=100000;for(let i=0;i<60;i++){const m=(lo+hi)/2;if(nlCalc(I,m).net<target)lo=m;else hi=m}return hi}
+
+/* --- Hilfetexte --- */
+const NL_INFO={
+  ueberg:"Zwischen 603,01 € und 2.000 € Monatsverdienst zahlen Arbeitnehmer reduzierte Sozialabgaben (Übergangsbereich). Bei „Ja“ wird das berücksichtigt; bis 603 € fallen keine Abgaben an (Minijob).",
+  bav:"Beiträge zur betrieblichen Altersvorsorge per Entgeltumwandlung sind bis 8 % der Beitragsbemessungsgrenze der Rentenversicherung steuerfrei, davon bis 4 % auch sozialabgabenfrei. Bitte den monatlichen Betrag angeben.",
+  gwv:"Sachbezüge wie ein Firmenwagen erhöhen das steuer- und abgabenpflichtige Brutto, werden aber nicht ausgezahlt. Bitte den monatlichen Wert angeben, auch wenn jährlich gerechnet wird.",
+  freib:"Ein auf der elektronischen Lohnsteuerkarte (ELStAM) eingetragener Jahresfreibetrag senkt die Lohnsteuer. Er kann beim Finanzamt beantragt werden.",
+  sk:"I: Ledige · II: Alleinerziehende · III: Verheiratete, die deutlich mehr verdienen (Kombination mit V) · IV: Verheiratete mit ähnlichem Einkommen · V: Verheiratete mit geringerem Einkommen · VI: zweites oder weiteres Arbeitsverhältnis.",
+  faktor:"Bei Steuerklasse IV mit Faktor wird die Lohnsteuer mit dem auf der Lohnsteuerkarte eingetragenen Faktor (kleiner als 1, z. B. 0,85) multipliziert.",
+  kist:"Die Kirchensteuer beträgt 8 % der Lohnsteuer in Baden-Württemberg und Bayern, in allen anderen Bundesländern 9 %.",
+  kammer:"Beschäftigte in Bremen und im Saarland zahlen zusätzlich einen Beitrag an die Arbeitnehmerkammer (hier pauschal 0,15 % des Bruttos).",
+  kv:"Gesetzlich Versicherte zahlen den halben allgemeinen Beitragssatz plus den halben kassenindividuellen Zusatzbeitrag; die andere Hälfte trägt der Arbeitgeber.",
+  kvr:"Der allgemeine Beitragssatz zur gesetzlichen Krankenversicherung beträgt 14,6 %, davon trägt jede Seite die Hälfte.",
+  zus:"Den Zusatzbeitrag legt jede Krankenkasse selbst fest. Wählen Sie Ihre Kasse aus der Liste (Stand 2026, ohne Gewähr) oder tragen Sie den Satz selbst ein.",
+  pkv:"Bei privater Krankenversicherung gilt Ihre monatliche Prämie (inkl. Pflegeversicherung). Der Arbeitgeber darf maximal die Hälfte, höchstens den Betrag des hälftigen Höchstbeitrags der gesetzlichen Kasse, zuschießen.",
+  pkvag:"Beteiligt sich Ihr Arbeitgeber an den Beiträgen zu Ihrer privaten Krankenversicherung?",
+  haveKids:"Kinderlose Arbeitnehmer ab 23 Jahren zahlen einen Zuschlag von 0,6 Prozentpunkten zur Pflegeversicherung. Ab dem zweiten Kind sinkt der Beitrag.",
+  kids:"Kinder unter 25 Jahren wirken sich auf den Pflegeversicherungsbeitrag aus (Abschlag ab dem 2. Kind).",
+  kfb:"Der Kinderfreibetrag steht auf der Lohnsteuerkarte (0,5 pro Elternteil und Kind). Er wirkt sich auf Solidaritätszuschlag und Kirchensteuer aus.",
+  rv:"Beschäftigte sind in der Regel rentenversicherungspflichtig. Bei Sonderfällen (z. B. nur Arbeitgeberanteil) können Sie das hier anpassen.",
+  av:"Der Beitrag zur Arbeitslosenversicherung beträgt 2,6 % und wird je zur Hälfte von Arbeitnehmer und Arbeitgeber getragen.",
+  gehaelter:"13. und 14. Gehalt sind Einmalzahlungen. Das Ergebnis zeigt immer die Werte für 12 Monatsgehälter."
+};
+
+/* --- Formular --- */
+const nlOpts=(arr,cur)=>arr.map(([v,l])=>`<option value="${v}"${String(cur)===String(v)?" selected":""}>${l}</option>`).join("");
+const nlSel=(k,arr)=>`<select id="nl_${k}" data-nl="${k}">${nlOpts(arr,NL[k])}</select>`;
+const nlSeg=(k,arr)=>`<div class="nl-seg" role="radiogroup">${arr.map(([v,l])=>`<label><input type="radio" name="nl_${k}" data-nl="${k}" value="${v}">${l}</label>`).join("")}</div>`;
+const nlInp=(k,unit,ph)=>`<div class="nl-inp"><input id="nl_${k}" type="text" inputmode="decimal" data-nl="${k}" value="${esc(NL[k])}" placeholder="${ph||""}" autocomplete="off">${unit?`<span>${unit}</span>`:""}</div>`;
+const nlRange=(a,b,st,suf)=>{const r=[];for(let v=a;v<=b+1e-9;v+=st)r.push([String(v),String(v).replace(".",",")+(suf||"")]);return r};
+function nlRow(id,label,ctrl,o){o=o||{};const inp=o.inp;
+  return`<div class="nl-row" data-row="${id}"${o.ext?' data-ext="1"':""}><${inp?`label for="nl_${inp}"`:'div'} class="nl-lab">${label}${NL_INFO[id]?`<button type="button" class="nl-i" data-info="${id}" aria-label="Info zu ${esc(label.replace(/<[^>]+>/g,""))}">i</button>`:""}</${inp?"label":"div"}><div>${ctrl}</div>${NL_INFO[id]?`<div class="nl-hint" data-hint="${id}" hidden>${esc(NL_INFO[id])}</div>`:""}</div>`}
+const NL_JN=[["j","Ja"],["n","Nein"]];
+
+function nlFormHTML(){
+  const kassen=`<select id="nl_kasse" data-nl="kasse"><option value="">Krankenkasse wählen …</option>${NL_KASSEN.map(([n,z],i)=>`<option value="${i}"${String(NL.kasse)===String(i)?" selected":""}>${n} (${String(z).replace(".",",")} %)</option>`).join("")}</select>`;
+  return[
+    nlRow("amount",`Ihr <span id="nlAmtLab">Bruttolohn</span> *`,`<div style="display:grid;gap:8px">${nlSeg("mode",[["brutto","Bruttolohn"],["netto","Wunschnettolohn"]])}${nlInp("amount","€","z. B. 3.500")}</div>`,{inp:"amount"}),
+    nlRow("ueberg","Übergangsbereich berücksichtigen?",nlSeg("ueberg",NL_JN),{ext:1}),
+    nlRow("per","Abrechnungszeitraum",nlSeg("per",[["m","Monat"],["y","Jahr"]])),
+    nlRow("bav","betriebliche Altersvorsorge",nlInp("bav","€/mtl.","0"),{ext:1,inp:"bav"}),
+    nlRow("gwv","Geldwerter Vorteil",nlInp("gwv","€/mtl.","0"),{ext:1,inp:"gwv"}),
+    nlRow("freib","Jährl. Steuerfreibetrag",nlInp("freib","€","0"),{ext:1,inp:"freib"}),
+    nlRow("sk","Ihre Steuerklasse *",nlSel("sk",[["1","Klasse 1"],["2","Klasse 2"],["3","Klasse 3"],["4","Klasse 4"],["4F","Klasse 4 mit Faktor"],["5","Klasse 5"],["6","Klasse 6"]]),{inp:"sk"}),
+    nlRow("faktor","Faktor auf der LohnSt.-Karte",nlInp("faktor","","z. B. 0,85"),{inp:"faktor"}),
+    nlRow("kist","Zahlen Sie Kirchensteuer",nlSeg("kist",NL_JN)),
+    nlRow("land","Ihr Bundesland *",nlSel("land",NL_LAENDER.map(l=>[l,l])),{inp:"land"}),
+    nlRow("kammer","Arbeitskammerbeitrag",nlSeg("kammer",NL_JN),{ext:1}),
+    nlRow("kv","Krankenversicherung",nlSel("kv",[["gkv","gesetzlich pflichtversichert"],["pkv","privat versichert"],["frei","freiwillig gesetzlich versichert"]]),{inp:"kv"}),
+    nlRow("kvr","Krankenversicherungssatz",nlInp("kvr","%","14,6"),{ext:1,inp:"kvr"}),
+    nlRow("zus","Krankenversicherungszusatzbeitrag",`<div class="nl-two">${nlInp("zus","%","2,9")}${kassen}</div>`,{inp:"zus"}),
+    nlRow("pkv","monatl. Prämie zur PKV",nlInp("pkv","€","z. B. 450"),{inp:"pkv"}),
+    nlRow("pkvag","Arbeitgeber-Beteiligung an PKV?",nlSeg("pkvag",NL_JN)),
+    nlRow("haveKids","Haben Sie Kinder?",nlSeg("haveKids",NL_JN)),
+    nlRow("kids","Kinder bis 25 Jahre",nlSel("kids",nlRange(0,6,1)),{ext:1,inp:"kids"}),
+    nlRow("kfb","Ihr Kinderfreibetrag",nlSel("kfb",nlRange(0,6,.5)),{ext:1,inp:"kfb"}),
+    nlRow("age","Ihr Alter",nlSel("age",nlRange(17,77,1," Jahre")),{ext:1,inp:"age"}),
+    nlRow("rv","Rentenversicherung",nlSel("rv",[["nein","nicht gesetzlich pflichtversichert"],["voll","gesetzlich pflichtversichert"],["nurAG","nur Arbeitgeber-Pflichtanteil"],["nurAN","nur Arbeitnehmer-Pflichtanteil"]]),{ext:1,inp:"rv"}),
+    nlRow("av","Arbeitslosenversicherung",nlSel("av",[["nein","nicht gesetzlich pflichtversichert"],["voll","gesetzlich pflichtversichert"],["nurAG","nur Arbeitgeber-Pflichtanteil"],["nurAN","nur Arbeitnehmer-Pflichtanteil"]]),{ext:1,inp:"av"}),
+    nlRow("std","Wöchentliche Arbeitsstunden",nlSel("std",[...nlRange(15,30,1),...nlRange(30.5,46,.5)]),{ext:1,inp:"std"}),
+    nlRow("gehaelter","Anzahl Gehälter pro Jahr",nlSel("gehaelter",[["12","12"],["13","13"],["14","14"]]),{ext:1,inp:"gehaelter"})
+  ].join("");
+}
+
+const NL_VIS={
+  faktor:()=>NL.sk==="4F",
+  kammer:()=>NL.land==="Bremen"||NL.land==="Saarland",
+  kvr:()=>NL.kv!=="pkv",zus:()=>NL.kv!=="pkv",
+  pkv:()=>NL.kv==="pkv",pkvag:()=>NL.kv==="pkv"
+};
+function nlVis(){
+  document.querySelectorAll("#nlRoot .nl-row").forEach(r=>{
+    const id=r.dataset.row;
+    r.hidden=(r.dataset.ext&&!NL.ext)||(NL_VIS[id]&&!NL_VIS[id]());
+  });
+  const l=document.getElementById("nlAmtLab");if(l)l.textContent=NL.mode==="netto"?"Wunschnettolohn":"Bruttolohn";
+  const b=document.getElementById("nlExtBtn");if(b)b.textContent=NL.ext?"Standard Formular":"Erweitertes Formular";
+}
+function nlGet(k){return k==="haveKids"?(NL.kids>0?"j":"n"):NL[k]}
+function nlSync(){
+  document.querySelectorAll("#nlRoot [data-nl]").forEach(el=>{
+    const v=String(nlGet(el.dataset.nl));
+    if(el.type==="radio")el.checked=el.value===v;
+    else if(el.tagName==="SELECT"||el!==document.activeElement)el.value=v;
+  });
+}
+function nlAutoKfb(){if(!NL.kfbManual){const per={"1":.5,"2":1,"3":1,"4":.5,"4F":.5}[NL.sk]||0;NL.kfb=Math.min(6,NL.kids*per)}}
+function nlOnChange(ev){
+  const el=ev.target.closest("[data-nl]");if(!el)return;
+  const text=el.tagName==="INPUT"&&el.type==="text";
+  if(ev.type==="input"&&!text)return;
+  if(ev.type==="change"&&text)return nlAfter(false);
+  if(el.type==="radio"&&!el.checked)return;
+  const k=el.dataset.nl,v=el.value;
+  if(k==="haveKids"){NL.kids=v==="j"?Math.max(1,+NL.kids):0;NL.kfbManual=false;nlAutoKfb()}
+  else if(k==="kids"){NL.kids=+v;NL.kfbManual=false;nlAutoKfb()}
+  else if(k==="kfb"){NL.kfb=+v;NL.kfbManual=true}
+  else if(k==="sk"){NL.sk=v;nlAutoKfb()}
+  else if(k==="year"){NL.year=v;if(!NL.zusManual)NL.zus=String(NL_Y[v].zus).replace(".",",")}
+  else if(k==="zus"){NL.zus=v;NL.zusManual=true;NL.kasse=""}
+  else if(k==="kasse"){NL.kasse=v;if(v!==""){NL.zus=String(NL_KASSEN[+v][1]).replace(".",",");NL.zusManual=true}}
+  else NL[k]=v;
+  nlAfter(!text);
+}
+function nlAfter(sync){if(sync)nlSync();nlVis();nlSave();if(NL.calced)nlCompute()}
+
+/* --- Ergebnis --- */
+function nlCompute(scroll){
+  const out=document.getElementById("nlResult");if(!out)return;
+  const I=nlEff(),a=nlNum(NL.amount),err=[];
+  if(!(a>0))err.push("Bitte geben Sie einen Betrag ein.");
+  if(I.sk==="4F"&&!(I.faktor>0&&I.faktor<1))err.push("Bitte geben Sie einen Faktor zwischen 0 und 1 ein (z. B. 0,85).");
+  if(I.kv==="pkv"&&!(I.pkv>0))err.push("Bitte geben Sie die monatliche PKV-Prämie ein.");
+  if(err.length){out.innerHTML=`<div class="card nl-res"><div class="nl-err">${err.map(esc).join("<br>")}</div></div>`;return}
+  NL.calced=true;
+  const m=NL.per==="y"?a/12:a;
+  const g=NL.mode==="netto"?nlSolve(I,m):m;
+  out.innerHTML=nlResultHTML(nlCalc(I,g),I);
+  if(scroll)out.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function nlResultHTML(R,I){
+  const Y=NL_Y[I.year],y=v=>v*12,c=v=>eur(Math.round(v*100)/100);
+  const tr=(lab,v,cls)=>`<tr class="${cls||""}"><td>${lab}</td><td class="n ${cls==="neg"?"out":""}">${cls==="neg"?"− ":""}${c(v)}</td><td class="n ${cls==="neg"?"out":""}">${cls==="neg"?"− ":""}${c(y(v))}</td></tr>`;
+  const steuer=R.lst+R.soli+R.kist,kvpv=R.kv+R.pv,rvav=R.rv+R.av;
+  const tot=R.net+steuer+R.ka+kvpv+rvav||1;
+  const seg=[["Netto",R.net,"var(--ac2)"],["Steuern",steuer,"var(--out)"],["Kranken-/Pflegeversicherung",kvpv+R.ka,"var(--ac)"],["Renten-/Arbeitslosenvers.",rvav,"#a78bfa"]];
+  const hours=I.std*52/12,rate=R.g/hours;
+  let notes="";
+  if(R.mini)notes+=`<div class="nl-note">Bis ${eur(Y.mG)} Monatsverdienst fallen für Arbeitnehmer keine Sozialabgaben an (Minijob).</div>`;
+  else if(R.mid)notes+=`<div class="nl-note">Es wurde der Übergangsbereich (reduzierte Sozialabgaben) berücksichtigt.</div>`;
+  if(I.kv==="gkv"&&R.g*12>Y.jaeg)notes+=`<div class="nl-note">Ihr Jahresbrutto liegt über der Versicherungspflichtgrenze von ${eur(Y.jaeg)}. Ein Wechsel in die private Krankenversicherung wäre grundsätzlich möglich.</div>`;
+  if(NL.ext&&I.gehaelter>12)notes+=`<div class="nl-note">Jahresbrutto bei ${I.gehaelter} Gehältern: ${c(R.g*I.gehaelter)} – die Berechnung zeigt Werte für 12 Monatsgehälter.</div>`;
+  return`<div class="nl-res">
+  <div class="grid kpis">
+    <div class="card kpi"><small>Nettolohn / Monat</small><b class="in">${c(R.net)}</b></div>
+    <div class="card kpi"><small>Nettolohn / Jahr</small><b>${c(y(R.net))}</b></div>
+    <div class="card kpi"><small>${NL.mode==="netto"?"Benötigter Bruttolohn / Monat":"Bruttolohn / Monat"}</small><b>${c(R.g)}</b></div>
+    <div class="card kpi"><small>Abzüge gesamt</small><b class="out">${c(R.abz)}</b><div class="tag" style="margin-top:4px">${nlPct(R.abz/(R.g||1))} vom Brutto</div></div>
+  </div>
+  <div class="card">
+    <div class="ph"><h2>Ihre Gehaltsabrechnung ${I.year}</h2></div>
+    <div class="nl-stack">${seg.map(([n,v,col])=>`<i title="${n}" style="width:${Math.max(0,v/tot*100)}%;background:${col}"></i>`).join("")}</div>
+    <div class="nl-leg">${seg.map(([n,v,col])=>`<span style="--c:${col}">${n} ${nlPct(v/tot)}</span>`).join("")}</div>
+    <div style="overflow-x:auto"><table>
+      <tr><th></th><th class="n">Monatlich</th><th class="n">Jährlich</th></tr>
+      ${tr("Bruttolohn",R.g)}
+      ${R.gwv>0?tr("+ Geldwerter Vorteil",R.gwv):""}
+      ${R.bav>0?tr("Entgeltumwandlung (bAV)",R.bav,"neg"):""}
+      ${tr("Lohnsteuer",R.lst,"neg")}${tr("Solidaritätszuschlag",R.soli,"neg")}${tr("Kirchensteuer",R.kist,"neg")}
+      ${R.ka>0?tr("Arbeitskammerbeitrag",R.ka,"neg"):""}
+      ${tr("Krankenversicherung",R.kv,"neg")}${I.kv==="pkv"?"":tr("Pflegeversicherung",R.pv,"neg")}
+      ${tr("Rentenversicherung",R.rv,"neg")}${tr("Arbeitslosenversicherung",R.av,"neg")}
+      ${R.gwv>0?tr("Geldwerter Vorteil (nicht ausgezahlt)",R.gwv,"neg"):""}
+      ${tr("Nettolohn (Auszahlung)",R.net,"tot")}
+    </table></div>
+    <div class="nl-note">Brutto-Stundenlohn bei ${String(I.std).replace(".",",")} Wochenstunden: ca. ${c(rate)}</div>
+    ${notes}
+    <div class="nl-note">Näherungsrechnung auf Basis der Steuer- und Sozialversicherungswerte ${I.year}. Sie ersetzt keine offizielle Lohnabrechnung; im Einzelfall kann das Ergebnis um wenige Euro abweichen.</div>
+  </div></div>`;
+}
+
+/* --- Seite --- */
+function renderNetto(){
+  document.getElementById("app").innerHTML=`<div id="nlRoot">
+  <div class="nl-top"><button id="nlBack" type="button">${t('nettoBack')}</button></div>
+  <div class="card nl-head" style="margin-bottom:14px"><h2>Gehaltsrechner</h2><p>Hier können Sie Ihren Nettolohn <b>kostenlos</b> berechnen!</p></div>
+  <div class="card nl-form">${nlFormHTML()}
+    <div class="nl-act"><button id="nlCalc" class="p" type="button">Berechnen</button><button id="nlExtBtn" class="nl-link" type="button"></button></div>
+  </div>
+  <div id="nlResult" aria-live="polite"></div>
+  <div class="card nl-info"><div class="ph"><h2>Informationen zum Gehaltsrechner</h2></div>
+    <details><summary>Steuerklassen</summary><p>${esc(NL_INFO.sk)}</p></details>
+    <details><summary>Krankenversicherung &amp; Zusatzbeitrag</summary><p>Der allgemeine Beitragssatz liegt bei 14,6 % und wird zwischen Arbeitnehmer und Arbeitgeber geteilt. Zusätzlich erhebt jede Kasse einen eigenen Zusatzbeitrag (2026 im Durchschnitt 2,9 %), den ebenfalls beide Seiten je zur Hälfte tragen. Beiträge werden nur bis zur Beitragsbemessungsgrenze fällig (2026: 5.812,50 € monatlich).</p></details>
+    <details><summary>Pflegeversicherung</summary><p>Der Beitragssatz beträgt 3,6 %. Kinderlose ab 23 Jahren zahlen zusätzlich 0,6 Prozentpunkte allein. Ab dem zweiten Kind unter 25 Jahren sinkt der Arbeitnehmeranteil um 0,25 Prozentpunkte je Kind (bis zum fünften Kind). In Sachsen ist der Arbeitnehmeranteil höher.</p></details>
+    <details><summary>Rentenversicherung &amp; Arbeitslosenversicherung</summary><p>Die Beiträge betragen 18,6 % (Rente) und 2,6 % (Arbeitslosenversicherung), jeweils hälftig. Die Beitragsbemessungsgrenze liegt 2026 bei 8.450 € monatlich.</p></details>
+    <details><summary>Kinderfreibetrag</summary><p>${esc(NL_INFO.kfb)} Für 2026 beträgt er 9.756 € je Kind (beide Elternteile zusammen).</p></details>
+    <details><summary>Anzahl Gehälter</summary><p>${esc(NL_INFO.gehaelter)}</p></details>
+    <details><summary>Änderungen 2026</summary><p>Grundfreibetrag 12.348 € (vorher 12.096 €), Kinderfreibetrag 9.756 € (vorher 9.600 €), Kindergeld 259 € je Kind und ein durchschnittlicher Zusatzbeitrag von 2,9 %.</p></details>
+  </div></div>`;
+  const root=document.getElementById("nlRoot");
+  root.addEventListener("input",nlOnChange);root.addEventListener("change",nlOnChange);
+  root.addEventListener("keydown",ev=>{if(ev.key==="Enter"&&ev.target.matches("input[type=text]")){ev.preventDefault();nlCompute(true)}});
+  root.addEventListener("click",ev=>{
+    const i=ev.target.closest("[data-info]");
+    if(i){const h=root.querySelector(`[data-hint="${i.dataset.info}"]`);if(h){h.hidden=!h.hidden;i.classList.toggle("on",!h.hidden)}return}
+    if(ev.target.closest("#nlCalc"))return nlCompute(true);
+    if(ev.target.closest("#nlExtBtn")){NL.ext=!NL.ext;nlVis();nlSave();if(NL.calced)nlCompute();return}
+    if(ev.target.closest("#nlBack")){view="home";NL.calced=false;render();window.scrollTo({top:0})}
+  });
+  nlSync();nlVis();
+}
+document.getElementById("hNetto").onclick=()=>{
+  document.querySelectorAll(".menu-dropdown").forEach(d=>d.removeAttribute("open"));
+  view="netto";NL.calced=false;render();window.scrollTo({top:0});
+};
+
 render();
 if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
 </script>
